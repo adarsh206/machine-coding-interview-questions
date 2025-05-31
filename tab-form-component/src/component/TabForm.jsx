@@ -29,7 +29,19 @@ const TabForm = () => {
     }
   ]
 
-  const ActiveTabComponent = tabs[activeTab].component
+  const ActiveTabComponent = tabs[activeTab].component;
+
+  const handleNextClick = () => {
+    setActiveTab((prev) => prev + 1 )
+  }
+
+   const handlePrevClick = () => {
+    setActiveTab((prev) => prev - 1 )
+  }
+
+  const handleSubmitClick = () => {
+
+  }
 
   return (
     <div>
@@ -44,6 +56,11 @@ const TabForm = () => {
       </div>
       <div className='tab-body'>
         <ActiveTabComponent data={data} setData={setData}/>
+      </div>
+      <div className='navigation'>
+        {activeTab > 0 && <button className='submit' onClick={handlePrevClick}>Prev</button> }
+        {activeTab < tabs.length - 1 && <button className='submit' onClick={handleNextClick}>Next</button> }
+        {activeTab === tabs.length - 1 && <button className='submit' onClick={handleSubmitClick}>Submit</button> }
       </div>
     </div>
   )
