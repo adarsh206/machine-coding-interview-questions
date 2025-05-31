@@ -53,3 +53,9 @@
     justify-content: center;
     gap: 5px;
 }
+
+.error{
+    color: red;
+    display: block;
+    font-size: small;
+}

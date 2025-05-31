@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Profile = ({ data, setData}) => {
+const Profile = ({ data, setData, errors}) => {
 
   const { name, email, age, interests, theme } = data;
 
@@ -16,23 +16,18 @@ const Profile = ({ data, setData}) => {
       <div className='profile-name'>
         <label>Name : </label>
         <input className='input-name' type='text' placeholder='write about yourself' value={name} onChange={(e) => handleDataChange(e, "name")}/>
+        {errors.name && <span className='error'>{errors.name}</span>}
       </div>
       <div className='profile-name'>
         <label>Age : </label>
         <input className='input-name' type='number' placeholder='write about yourself' value={age} onChange={(e) => handleDataChange(e, "age")}/>
+       {errors.age && <span className='error'>{errors.age}</span>}
       </div>
       <div className='profile-name'>
         <label>Email : </label>
         <input className='input-name' type='email' placeholder='write about yourself' value={email} onChange={(e) => handleDataChange(e, "email")}/>
-      </div>
-      <div className='profile-name'>
-        <label>Interests : </label>
-        <input className='input-name' type='text' placeholder='write about yourself' value={interests} onChange={(e) => handleDataChange(e, "interests")}/>
-      </div>
-      <div className='profile-name'>
-        <label>Theme : </label>
-        <input className='input-name' type='text' placeholder='write about yourself' value={theme} onChange={(e) => handleDataChange(e, "theme")}/>
-      </div>
+         {errors.email && <span className='error'>{errors.email}</span>}
+      </div>     
     </div>
   )
 }

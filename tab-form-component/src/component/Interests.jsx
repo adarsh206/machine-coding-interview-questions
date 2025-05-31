@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Interests = ({data, setData}) => {
+const Interests = ({data, setData, errors}) => {
   
   const { interests } = data;
 
@@ -31,6 +31,7 @@ const Interests = ({data, setData}) => {
           Javascript
         </label>
       </div>
+      {errors.interests && <span className='error'>{errors.interests}</span>}
     </div>
   )
 }
