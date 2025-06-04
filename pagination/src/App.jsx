@@ -1,15 +1,9 @@
 
 import { useEffect, useState } from 'react';
 import './App.css'
+import { PAGE_SIZE } from './constants';
+import ProductCard from './components/ProductCard';
 
-const ProductCard = ({image, title}) => {
-  return <div className='product-card'>
-    <img src={image} alt={title} className='product-img'/>
-    <span>{title}</span>
-  </div>
-}
-
-const PAGE_SIZE = 12;
 
 function App() {
 
