@@ -4,13 +4,20 @@ import './App.css'
 import json from "./data.json"
 
 // Render list of objects
-const List = ({list}) => {
+const List = ({ list, addNodeToList }) => {
+
+  const [isExpanded, setIsExpanded] = useState({});
+
   return (<div className='container'>
       {
         list.map((node) => (
           <div key={node.id}>
-            <span>{node.name}</span>  
-            {node?.children && <List list={node.children}/>}
+            {node.isFolder === true && (<span onClick={() => setIsExpanded((prev) => ({...prev, [node.name] : !prev[node.name],}))}>
+              {isExpanded?.[node.name]? "- " : "+ "}</span>)}  
+            <span>{node.name}</span> 
+           {node?.isFolder === true &&  (<span onClick={() => addNodeToList(node.id)}><img src='https://cdn-icons-png.flaticon.com/512/4732/4732392.png' alt='icon' className='icon'/></span>)}
+        
+            {isExpanded?.[node.name] && node?.children && <List list={node.children} addNodeToList={addNodeToList}/>}
           </div>
           
         ))
@@ -22,10 +29,33 @@ function App() {
 
   const [data, setData] = useState(json);
 
+  const addNodeToList = (parentId) => {
+
+    const name = prompt("Enter Name");
+
+
+
+    const updateTree = (list) => {
+      return list.map(node => {
+        if(node.id === parentId){
+          return {
+            ...node,
+            children: [...node.children, {id:"123", name: name, isFolder: true, children: []},]
+          }
+        }
+        if(node.children){
+          return {...node, children: updateTree(node.children)}
+        }
+        return node;
+      })
+    }
+    setData((prev) => updateTree(prev))
+  }
+
   return (
     <div className='App'>
     <h1>File Explorer</h1>
-    <List list={data}/>
+    <List list={data} addNodeToList={addNodeToList}/>
     </div>
   )
 }
