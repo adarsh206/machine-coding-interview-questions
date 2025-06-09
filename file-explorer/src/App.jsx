@@ -4,7 +4,7 @@ import './App.css'
 import json from "./data.json"
 
 // Render list of objects
-const List = ({ list, addNodeToList }) => {
+const List = ({ list, addNodeToList, deleteNodeFromList }) => {
 
   const [isExpanded, setIsExpanded] = useState({});
 
@@ -16,8 +16,8 @@ const List = ({ list, addNodeToList }) => {
               {isExpanded?.[node.name]? "- " : "+ "}</span>)}  
             <span>{node.name}</span> 
            {node?.isFolder === true &&  (<span onClick={() => addNodeToList(node.id)}><img src='https://cdn-icons-png.flaticon.com/512/4732/4732392.png' alt='icon' className='icon'/></span>)}
-        
-            {isExpanded?.[node.name] && node?.children && <List list={node.children} addNodeToList={addNodeToList}/>}
+        <span onClick={() => deleteNodeFromList(node.id)}><img src='https://static-00.iconduck.com/assets.00/delete-icon-938x1024-q3vs1il0.png' alt='icon' className='icon'/></span>
+            {isExpanded?.[node.name] && node?.children && <List list={node.children} addNodeToList={addNodeToList} deleteNodeFromList={deleteNodeFromList}/>}
           </div>
           
         ))
@@ -40,7 +40,7 @@ function App() {
         if(node.id === parentId){
           return {
             ...node,
-            children: [...node.children, {id:"123", name: name, isFolder: true, children: []},]
+            children: [...node.children, {id: Date.now().toString(), name: name, isFolder: true, children: []},]
           }
         }
         if(node.children){
@@ -52,10 +52,24 @@ function App() {
     setData((prev) => updateTree(prev))
   }
 
+  const deleteNodeFromList = (itemId) => {
+
+    const updateTree = (list) => {
+
+      return list.filter((node) => node.id !== itemId).map((node) => {
+        if(node.children){
+          return {...node, children: updateTree(node.children)}
+        }
+        return node;
+      })
+    }
+    setData((prev) => updateTree(prev));
+  }
+
   return (
     <div className='App'>
     <h1>File Explorer</h1>
-    <List list={data} addNodeToList={addNodeToList}/>
+    <List list={data} addNodeToList={addNodeToList} deleteNodeFromList={deleteNodeFromList}/>
     </div>
   )
 }
