@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import './App.css'
 
 const OTP_DIGITS_COUNT = 5;
@@ -8,6 +8,7 @@ function App() {
 
   const [inputArr, setInputArr] = useState(new Array(OTP_DIGITS_COUNT).fill(""));
 
+  const refArr = useRef([]);
   const handleOnChange = (value, index) => {
 
     if(isNaN(value)) return;
@@ -26,6 +27,7 @@ function App() {
       inputArr.map((input, index) =>  {
        return <input key={index} type='text' className='otp-input' 
        value={inputArr[index]} 
+       ref={(input) =>(refArr.current[index] = input)}
        onChange={(e) => handleOnChange(e.target.value, index)}/>
 })
     }
