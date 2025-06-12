@@ -8,8 +8,14 @@ function App() {
 
   const [inputArr, setInputArr] = useState(new Array(OTP_DIGITS_COUNT).fill(""));
 
-  const handleOnChange = (value) => {
+  const handleOnChange = (value, index) => {
+
+    if(isNaN(value)) return;
+
     console.log(value)
+    const newArr = [...inputArr];
+    newArr[index] = value.slice(-1);
+    setInputArr(newArr);
 
   }
 
@@ -20,7 +26,7 @@ function App() {
       inputArr.map((input, index) =>  {
        return <input key={index} type='text' className='otp-input' 
        value={inputArr[index]} 
-       onChange={(e) => handleOnChange(e.target.value)}/>
+       onChange={(e) => handleOnChange(e.target.value, index)}/>
 })
     }
   
