@@ -1,5 +1,5 @@
 
-import { Children } from 'react'
+import { Children, useState } from 'react'
 import './App.css'
 
 const checkboxesData = [
@@ -58,14 +58,26 @@ const checkboxesData = [
   },
 ]
 
-const CheckBoxes = ({data}) => {
+const CheckBoxes = ({ data, checked, setChecked }) => {
 
+  const handleChange = (e, id) => {
+    setChecked((prev) =>{
+      const newState = {...prev, [id] : e.target.checked};
+      return newState;
+    })
+  }
+
+  console.log(checked)
   return (
   <div>
     {
-    data.map((node) => (<div>
-      <input type='checkbox'/>
+    data.map((node) => (<div key={node.id} className='parent'>
+      <input type='checkbox' checked={checked[node.id] || false} onChange={(e) => handleChange(e, node.id)}/>
       <span>{node.name}</span>
+      {
+        node.Children && (<CheckBoxes data={node.Children} checked={checked} setChecked={setChecked}/>)
+      }
+      
       </div>))
 
     }
@@ -76,11 +88,12 @@ const CheckBoxes = ({data}) => {
 
 function App() {
 
+  const [checked, setChecked] = useState({});
 
   return (
    <div className='App'>
     <h1> Nested Checkboxes</h1>
-    <CheckBoxes data={checkboxesData}/>
+    <CheckBoxes data={checkboxesData} checked={checked} setChecked={setChecked} />
    </div>
   )
 }
