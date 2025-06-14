@@ -60,9 +60,16 @@ const checkboxesData = [
 
 const CheckBoxes = ({ data, checked, setChecked }) => {
 
-  const handleChange = (e, id) => {
+  const handleChange = (isChecked, node) => {
     setChecked((prev) =>{
-      const newState = {...prev, [id] : e.target.checked};
+      const newState = {...prev, [node.id] : isChecked};
+      // if children are present, add all of them to new state
+      const updateChildren = (node) => {
+        node.Children.forEach(child => {
+          newState[child.id] = isChecked;
+        })
+      }
+      updateChildren(node);
       return newState;
     })
   }
@@ -72,7 +79,7 @@ const CheckBoxes = ({ data, checked, setChecked }) => {
   <div>
     {
     data.map((node) => (<div key={node.id} className='parent'>
-      <input type='checkbox' checked={checked[node.id] || false} onChange={(e) => handleChange(e, node.id)}/>
+      <input type='checkbox' checked={checked[node.id] || false} onChange={(e) => handleChange(e.target.checked, node)}/>
       <span>{node.name}</span>
       {
         node.Children && (<CheckBoxes data={node.Children} checked={checked} setChecked={setChecked}/>)
