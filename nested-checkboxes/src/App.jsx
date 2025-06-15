@@ -63,13 +63,26 @@ const CheckBoxes = ({ data, checked, setChecked }) => {
   const handleChange = (isChecked, node) => {
     setChecked((prev) =>{
       const newState = {...prev, [node.id] : isChecked};
+
       // if children are present, add all of them to new state
       const updateChildren = (node) => {
-        node.Children.forEach(child => {
+        node.Children?.forEach((child) => {
           newState[child.id] = isChecked;
+          child.Children && updateChildren(child);
         })
       }
       updateChildren(node);
+
+      // if all children are checked, mark the parent as checked
+      const verifyChecked = (node) => {
+        if(!node.Children) return newState[node.id] || false;
+
+        const allChildrenChecked = node.Children.every((child) => verifyChecked(child));
+        newState[node.id] = allChildrenChecked;
+        return allChildrenChecked;
+      }
+
+      checkboxesData.forEach((node) => verifyChecked(node));
       return newState;
     })
   }
