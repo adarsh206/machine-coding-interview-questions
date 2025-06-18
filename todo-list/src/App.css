@@ -1,3 +1,43 @@
 .strikeThrough{
   text-decoration: line-through;
 }
+
+.App{
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+}
+.list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin: 10px;
+  font-size: large;
+}
+
+.input{
+  padding: 4px;
+  margin: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(17, 104, 226, 0.2);
+}
+
+.button{
+  padding: 6px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete{
+  cursor: pointer;
+  background-color: red;
+  color: white;
+  padding: 3px;
+  border: none;
+  border-radius: 4px;
+  margin-left: 5px;
+}
