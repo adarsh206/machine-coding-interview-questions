@@ -1,0 +1,18 @@
+.accordion-title{
+  width: 100%;
+  padding: 15px;
+  text-align: left;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.accordion-content{
+  font-size: 16px;
+  color: #666;
+  text-align: left;
+}

@@ -6,10 +6,10 @@ const Accordion = ({ items }) => {
         {
             items.map((item, index) => (
                 <div key={index}>
-                    <button>
+                    <button className='accordion-title'>
                         {item.title}
                     </button>
-                    <div>
+                    <div className='accordion-content'>
                         {item.content}
                     </div>
                 </div>
