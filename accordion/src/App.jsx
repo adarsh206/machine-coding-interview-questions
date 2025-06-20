@@ -28,8 +28,11 @@ function App() {
   ]
 
   return (
+ <>
+  <h1 className='App'>Accordion</h1>
+  <Accordion items={items} />
+ </>
  
- <Accordion items={items} />
 
   )
 }

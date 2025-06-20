@@ -1,17 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Accordion = ({ items }) => {
+
+    const [openIndex, setOpenIndex] = useState(null);
+
+    const handleToggle = (index) => {
+        setOpenIndex(openIndex === index ? null : index);
+    }
+
   return (
-    <div>
+    
+    <div className='accordion'>
         {
             items.map((item, index) => (
-                <div key={index}>
-                    <button className='accordion-title'>
+                <div key={index} className='accordion-item'>
+                    <button className='accordion-title' onClick={() => handleToggle(index)}>
                         {item.title}
                     </button>
-                    <div className='accordion-content'>
+                   {openIndex === index && <div className='accordion-content'>
                         {item.content}
-                    </div>
+                    </div>}
                 </div>
             ))
         }
