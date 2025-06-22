@@ -26,11 +26,15 @@ function App() {
     setValue((existingValue) => existingValue + val);
   }
 
+  const handleUndo = () => {
+    // Stack LIFO
+  }
+
   return (
   <div className='App'>
     <h1>Undoable Counter</h1>
     <div className='action-btn'>
-      <button>Undo</button>
+      <button onClick={handleUndo}>Undo</button>
       <button>Redo</button>
     </div>
 
@@ -60,7 +64,14 @@ function App() {
     <div className='history'>
       {
         history.map((item) => {
-          return <div>{item.action}: {item.prev}: {item.curr}</div>
+          return <div className='row'>
+            <div>{item.action}</div>
+            <div>
+              {
+                `[${item.prev} → ${item.curr}]`
+              }
+            </div>
+          </div>
         })
       }
     </div>
