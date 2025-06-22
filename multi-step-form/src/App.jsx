@@ -37,19 +37,45 @@ function App() {
 
   const [forms, setForms] = useState(data);
   const [index, setIndex] = useState(0);
+  const [formData, setFormData] = useState({
+    name: "",
+    email : "",
+    dob: "",
+    password: ""
+  })
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIndex((idx) => idx + 1);
+    if(index === forms.length - 1){
+      console.log("Form Submitted")
+    }
+    else{
+      setIndex((idx) => idx + 1);
+    }
+    
+  }
+
+
+  const handleBack = (e) => {
+    e.preventDefault();
+    setIndex((idx) => idx - 1);
+  }
+
+  const handleInputChange = (e) => {
+    
   }
 
 
   return (
    <div className='App'>
     <form className='container' onSubmit={handleSubmit}>
+      { index > 0 && <a href='/' onClick={handleBack}>
+        Back
+      </a>}
       <label>{forms[index].label}</label>
-      <input type={forms[index].inputType}  placeholder={forms[index].placeholder} />
+      <input onChange={handleInputChange}
+      type={forms[index].inputType}  placeholder={forms[index].placeholder} />
       <button>{forms[index].buttonName}</button>     
     </form>
    </div>
