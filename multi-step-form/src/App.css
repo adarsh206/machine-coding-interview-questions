@@ -35,3 +35,12 @@ button{
   border-radius: 5px;
   cursor: pointer;
 }
+
+.container{
+  font-size: 30px;
+  gap: 20px;
+}
+
+.main-container{
+  font-size: 40px;
+}
