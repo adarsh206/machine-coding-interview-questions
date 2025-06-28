@@ -16,7 +16,8 @@ const getNums = () => {
 function App() {
 
   const [nums, setNums] = useState(getNums());
-  const [stage, setStage] = useState('init')
+  const [opened, setOpened] = useState([]);
+  const [stage, setStage] = useState('init');
 
   const randomNums = () => {
     const copyNums = [...nums];
@@ -25,10 +26,16 @@ function App() {
 
   const handleStart = () => {
     setStage('start');
-    setNums(randomNums())
+    setNums(randomNums());
   }
 
-  console.log('nums', nums)
+  const handleClick = (num, index) => {
+    if(opened.length === 2) return 
+    setOpened((prev) => [...prev, index]);
+  }
+
+  console.log('opened', opened)
+
   return (
    <div className='App'>
     <h1>Memory Game</h1>
@@ -37,7 +44,13 @@ function App() {
       stage === "start" && 
       <div className='game'>
         <div className='cards'>
-          Hello
+          {
+            nums.map((num, i) => (
+              <div key={i} className={`card`} onClick={() => handleClick(num, i)}>
+                {num}
+              </div>
+            ))
+          }
         </div>
       </div>
     }
