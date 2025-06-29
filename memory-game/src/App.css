@@ -33,3 +33,13 @@
 .remove{
   visibility: hidden;
 }
+
+button{
+  width: 140px;
+  height: 40px;
+  background-color: purple;
+  border: none;
+  border-radius: 5px;
+  color: #FFF;
+  font-size: 20px;
+}

@@ -28,6 +28,7 @@ function App() {
   const handleStart = () => {
     setStage('start');
     setNums(randomNums());
+    setSolvedList([]);
   }
 
   const handleClick = (num, index) => {
@@ -37,7 +38,8 @@ function App() {
 
   console.log('opened', opened)
 
-  useEffect(() => {
+ 
+    useEffect(() => {
     if(opened.length === 2){
       setTimeout(() => {
         const id1 = opened[0];
@@ -51,7 +53,14 @@ function App() {
     }
   } ,[opened])
 
-  const getClassName = (num, index) => {
+
+  useEffect(() => {
+    if(solvedList.length === 8){
+      setStage('win')
+    }
+  }, [solvedList]);
+
+ const getClassName = (num, index) => {
     if(solvedList.includes(num)){
       return 'remove';
     }
@@ -63,6 +72,7 @@ function App() {
     }
   }
 
+  
   return (
    <div className='App'>
     <h1>Memory Game</h1>
@@ -85,7 +95,7 @@ function App() {
       stage === "win" && 
       <div>
         <h1>You won the Game !</h1>
-        <button>Play Again</button>
+        <button onClick={handleStart}>Play Again</button>
       </div>
     }
    </div>
