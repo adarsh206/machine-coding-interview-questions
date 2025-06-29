@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 
@@ -17,6 +17,7 @@ function App() {
 
   const [nums, setNums] = useState(getNums());
   const [opened, setOpened] = useState([]);
+  const [solvedList, setSolvedList] = useState([]);
   const [stage, setStage] = useState('init');
 
   const randomNums = () => {
@@ -36,6 +37,32 @@ function App() {
 
   console.log('opened', opened)
 
+  useEffect(() => {
+    if(opened.length === 2){
+      setTimeout(() => {
+        const id1 = opened[0];
+        const id2 = opened[1];
+
+        if(nums[id1] === nums[id2]){
+          setSolvedList((prev) => [...prev, nums[id1]]);
+        }
+        setOpened([]);
+      }, 1000)
+    }
+  } ,[opened])
+
+  const getClassName = (num, index) => {
+    if(solvedList.includes(num)){
+      return 'remove';
+    }
+    else if(opened.includes(index)){
+      return 'show';
+    }
+    else {
+      return 'hide';
+    }
+  }
+
   return (
    <div className='App'>
     <h1>Memory Game</h1>
@@ -46,7 +73,7 @@ function App() {
         <div className='cards'>
           {
             nums.map((num, i) => (
-              <div key={i} className={`card`} onClick={() => handleClick(num, i)}>
+              <div key={i} className={`card ${getClassName(num, i)}`} onClick={() => handleClick(num, i)}>
                 {num}
               </div>
             ))
