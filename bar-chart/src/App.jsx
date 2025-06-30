@@ -6,6 +6,7 @@ import { useState } from 'react'
 function App() {
 
   const [freq, setFreq] = useState(undefined);
+  const [yAxis, setYAxis] = useState([]);
 
   const fetchNumbers = async () => {
     const url = 'https://www.random.org/integers/?num=200&min=1&max=10&col=1&base=10&format=plain&rnd=new'
@@ -30,9 +31,18 @@ function App() {
   // [40, 30, 20, 10, 0]
   useEffect(() => {
     if(freq){
-
+      const max = Math.max(...Object.values(freq))
+      const maxVal = Math.ceil(max / 10) * 10;
+      let arr = [];
+      for(let i = (maxVal / 10); i >=0; i--){
+        // 3, 2, 1, 0
+        arr.push(i * 10); // 30, 20, 10, 0
+      }
+      setYAxis(arr);
     }
   } ,[freq])
+
+  console.log('yAxis', yAxis)
   useEffect(() => {
     fetchNumbers()
   }, [])
