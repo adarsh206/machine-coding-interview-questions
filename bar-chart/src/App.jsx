@@ -42,7 +42,7 @@ function App() {
     }
   } ,[freq])
 
-  console.log('yAxis', yAxis)
+  
   useEffect(() => {
     fetchNumbers()
   }, [])
@@ -50,6 +50,33 @@ function App() {
   return (
   <div className='App'>
     <h1>Bar Chart</h1>
+    <div className='container'>
+      <div className='box'>
+        <div className='box-y-axis'
+        style={{height: `${yAxis && yAxis[0]}%`}}>
+          {
+            yAxis?.map((val, idx) => (
+              <div key={idx}>
+                <span>{val}</span>
+              </div>
+            ))
+          }
+        </div>
+        {
+          freq && Object.entries(freq)?.map(([key, val]) => (
+            <div className='box-x-axis'>
+              <div style={{height: `${val}%`}}
+              className='graph'>
+
+              </div>
+              <div className="index">
+                {key}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
   </div>
   )
 }
