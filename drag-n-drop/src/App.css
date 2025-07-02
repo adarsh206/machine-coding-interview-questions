@@ -1,0 +1,77 @@
+.App{
+  text-align: center;
+}
+
+input{
+  width: 350px;
+  height: 35px;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.board{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo-col{
+  background-color: rgb(224, 224, 18);
+  padding: 10px 0px;
+}
+
+.doing-col{
+  background-color: rgb(203, 54, 208);
+  padding: 10px 0px;
+}
+
+.done-col{
+  background-color: rgb(38, 230, 38);
+  padding: 10px 0px;
+}
+
+.todo{
+  width: 33%;
+  height: 400px;
+}
+
+.doing{
+  width: 33%;
+  height: 400px;
+  margin: 0px 10px;
+}
+
+.done{
+  width: 33%;
+  height: 400px;
+}
+
+.task-item{
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+  border: 0.7px solid lightgray;
+  border-radius: 5px;
+  padding: 8px;
+  cursor: grab;
+  font-size: 20px;
+}
+
+.task-item:hover{
+  background-color: lightcyan;
+}
+
+.btn{
+  width: 70px;
+  height: 70px;
+  padding: 5px;
+}
+
+.btn:hover{
+  background-color: purple;
+  cursor: pointer;
+  border-radius: 50%;
+}
