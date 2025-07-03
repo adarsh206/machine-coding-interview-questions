@@ -58,6 +58,7 @@ input{
   padding: 8px;
   cursor: grab;
   font-size: 20px;
+  margin: 10px;
 }
 
 .task-item:hover{
