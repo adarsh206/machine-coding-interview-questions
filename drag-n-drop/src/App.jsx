@@ -34,8 +34,15 @@ function App() {
     setDragTask(task)
   }
 
- console.log(dragTask)
- 
+  const onDragOver = (e) => {
+    e.preventDefault();
+  }
+
+  const handleOnDrop = (e) => {
+    console.log(e)
+  }
+
+
   return (
  <div className='App'>
   <h1>Task Manager</h1>
@@ -57,7 +64,7 @@ function App() {
       
     </div>
 
-    <div className="doing">
+    <div className="doing" onDrop={handleOnDrop} onDragOver={onDragOver}>
       <h2 className='doing-col'>Doing</h2>
       {
         tasks.length > 0 && tasks.map((task) => (
