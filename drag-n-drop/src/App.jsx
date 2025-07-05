@@ -11,6 +11,7 @@ function App() {
   const [value, setValue] = useState('');
   const [tasks, setTasks] = useState([]);
   const [dragTask, setDragTask] = useState(null);
+  const [updateItem, setUpdateItem] = useState(null);
 
   const handleChange = (e) => {
     setValue(e.target.value)
@@ -18,14 +19,27 @@ function App() {
 
   const handleKeyDown = (e) => {
     console.log(e.keyCode);
-    if(e.keyCode === 13){
-      // Enter Pressed
-      const obj = {
-        title: value,
-        status: TODO,
-        id: Date.now()
+    if(e.keyCode === 13){ // Enter Pressed
+      
+      if(updateItem){ // User is coming for a update
+        const obj = {
+          title: value,
+          id: updateItem.id,
+          status: updateItem.status
+        }
+        const copyTask = [...tasks]
+        const filterList = copyTask.filter((item) => item.id !== updateItem.id);
+        setTasks((prevTask) => [...filterList, obj]);
+        setUpdateItem(null);
+      }
+      else{
+        const obj = {
+          title: value,
+          status: TODO,
+          id: Date.now()
       }
       setTasks((prev) => [...prev, obj]);
+      } 
       setValue('')
     }
   }
@@ -73,8 +87,9 @@ function App() {
 
   }
 
-  const updateTask = () => {
-
+  const updateTask = (task) => {
+    setUpdateItem(task);
+    setValue(task.title);
   }
 
   return (
@@ -106,7 +121,7 @@ function App() {
         task.status === DOING && <div className="task-item" draggable  key={task.id} onDrag={(e) => handleDrag(e, task)}>
         {task.title}
         <div className="btns">
-          <span className='btn'>✏️</span>
+          <span className='btn' onClick={() => updateTask(task)}>✏️</span>
           <span className='btn' onClick={() => deleteTask(task)}>❌</span>
         </div>
       </div>
@@ -121,7 +136,7 @@ function App() {
         task.status === DONE && <div className="task-item" draggable key={task.id} onDrag={(e) => handleDrag(e, task)}>
         {task.title}
         <div className="btns">
-          <span className='btn'>✏️</span>
+          <span className='btn' onClick={() => updateTask(task)}>✏️</span>
           <span className='btn' onClick={() => deleteTask(task)}>❌</span>
         </div>
       </div>
