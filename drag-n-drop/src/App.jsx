@@ -66,6 +66,16 @@ function App() {
     }
   }
 
+  const deleteTask = (item) => {
+    let copyTask = [...tasks];
+    copyTask = copyTask.filter((task) => task.id !== item.id);
+    setTasks(copyTask);
+
+  }
+
+  const updateTask = () => {
+
+  }
 
   return (
  <div className='App'>
@@ -80,8 +90,8 @@ function App() {
         task.status === TODO && <div className="task-item" draggable key={task.id} onDrag={(e) => handleDrag(e, task)}>
         {task.title}
         <div className="btns">
-          <span className='btn'>✏️</span>
-          <span className='btn'>❌</span>
+          <span className='btn' onClick={() => updateTask(task)}>✏️</span>
+          <span className='btn' onClick={() => deleteTask(task)}>❌</span>
         </div>
       </div>
         ))
@@ -93,11 +103,11 @@ function App() {
       <h2 className='doing-col'>Doing</h2>
       {
         tasks.length > 0 && tasks.map((task) => (
-        task.status === DOING && <div className="task-item" draggable  key={task.id}>
+        task.status === DOING && <div className="task-item" draggable  key={task.id} onDrag={(e) => handleDrag(e, task)}>
         {task.title}
         <div className="btns">
           <span className='btn'>✏️</span>
-          <span className='btn'>❌</span>
+          <span className='btn' onClick={() => deleteTask(task)}>❌</span>
         </div>
       </div>
         ))
@@ -108,11 +118,11 @@ function App() {
       <h2 className='done-col'>Done</h2>
       {
         tasks.length > 0 && tasks.map((task) => (
-        task.status === DONE && <div className="task-item" draggable key={task.id}>
+        task.status === DONE && <div className="task-item" draggable key={task.id} onDrag={(e) => handleDrag(e, task)}>
         {task.title}
         <div className="btns">
           <span className='btn'>✏️</span>
-          <span className='btn'>❌</span>
+          <span className='btn' onClick={() => deleteTask(task)}>❌</span>
         </div>
       </div>
         ))
