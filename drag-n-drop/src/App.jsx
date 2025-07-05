@@ -38,8 +38,32 @@ function App() {
     e.preventDefault();
   }
 
+  const handleDragNDrop = (status) => {
+    let copyTask = [...tasks];
+    copyTask = copyTask.map((item) => {
+      if(dragTask.id === item.id){
+        item.status = status
+      }
+      return item;
+    });
+    setTasks(copyTask);
+    setDragTask(null);
+  }
+
   const handleOnDrop = (e) => {
-    console.log(e)
+
+    const status =  e.target.getAttribute('data-status')
+    console.log('dropping', status);
+
+    if(status == TODO){
+      handleDragNDrop(TODO);
+    }
+    else if(status == DOING){
+      handleDragNDrop(DOING);
+    }
+    else if(status == DONE){
+      handleDragNDrop(DONE)
+    }
   }
 
 
@@ -48,7 +72,8 @@ function App() {
   <h1>Task Manager</h1>
   <input type='text' onChange={handleChange} value={value} onKeyDown={handleKeyDown}/>
   <div className='board'>
-    <div className="todo">
+
+    <div className="todo" data-status= {TODO} onDrop={handleOnDrop} onDragOver={onDragOver}>
       <h2 className='todo-col'>Todo</h2>
       {
         tasks.length > 0 && tasks.map((task) => (
@@ -64,7 +89,7 @@ function App() {
       
     </div>
 
-    <div className="doing" onDrop={handleOnDrop} onDragOver={onDragOver}>
+    <div className="doing" onDrop={handleOnDrop} onDragOver={onDragOver} data-status= {DOING}>
       <h2 className='doing-col'>Doing</h2>
       {
         tasks.length > 0 && tasks.map((task) => (
@@ -79,7 +104,7 @@ function App() {
       }
     </div>
 
-    <div className="done">
+    <div className="done" data-status= {DONE} onDrop={handleOnDrop} onDragOver={onDragOver}>
       <h2 className='done-col'>Done</h2>
       {
         tasks.length > 0 && tasks.map((task) => (
