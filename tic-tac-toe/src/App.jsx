@@ -6,12 +6,22 @@ function App() {
 
   const [matrix, setMatrix] = useState(Array(9).fill(null));
   const [isXTurn, setIsXTurn] = useState(true);
+  const [won , setWon] = useState(null);
 
   const handleUserClick = (e) => {
     const pos = e.target.id;
     console.log(pos)
     // X, O, X, O
+    const copyMatrix = [...matrix];
+    copyMatrix[pos] = isXTurn ? 'X' : 'O';
+    setMatrix(copyMatrix);
+    setIsXTurn((prevTurn) => !prevTurn);
   }
+
+  const decideWinner = () => {
+
+  }
+  
 
   return (
    <div className='App'>
@@ -27,8 +37,8 @@ function App() {
     </div>
     <div className='game-info'>
         <button>Reset</button>
-        <div className='next-player'>Next Player: X</div>
-        <div className='winner'>Player X won the game</div>
+        <div className='next-player'>Next Player: {isXTurn ? 'X' : 'O'}</div>
+        {won && <div className='winner'>Player X won the game</div>}
     </div>
    </div>
   )
