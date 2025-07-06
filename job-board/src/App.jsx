@@ -75,7 +75,7 @@ function App() {
     const url = 'https://hacker-news.firebaseio.com/v0/jobstories.json';
     const data = await getData(url);
     const ids = data.splice(0, 9);
-    setPostIDs(ids);
+    setPostIDs(data);
     fetchPostMetaData(ids);
   }
 
@@ -84,6 +84,14 @@ function App() {
   }, [])
 
 
+  const handleLoadMore = () => {
+    const copyIds = [...postIDs];
+    if(copyIds.length > 0){
+      const ids = copyIds.splice(0, 6);
+      fetchPostMetaData(ids);
+      setPostIDs(copyIds);
+    }
+  }
 
   return (
   <div className='App'>
@@ -91,9 +99,9 @@ function App() {
     <div className="cards">
       {
         postMetadata?.length === 0 ?
-        <div>Loading...</div>:
+        <h1 className='loader'>Loading...</h1>:
         postMetadata.map((post) => (
-          <a className='card'>
+          <a className='card' href={post.url} target='_blank'>
             <div className='company-info'>
               {post.jobTitle}
             </div>
@@ -107,6 +115,7 @@ function App() {
         ))
       }
     </div>
+    <button onClick={handleLoadMore}>Load More</button>
   </div>
   )
 }
