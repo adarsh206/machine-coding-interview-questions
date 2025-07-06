@@ -1,3 +1,13 @@
 .App{
   text-align: center;
+  margin: 20px;
+}
+
+.cards{
+  display: grid;
+  width: 100px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(auto-fill, auto-fill);
+  grid-row-gap: 16px;
+  grid-column-gap: 16px;
 }
