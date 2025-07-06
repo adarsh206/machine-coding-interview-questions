@@ -1,9 +1,12 @@
 
 import { useEffect } from 'react';
 import './App.css'
+import { useState } from 'react';
 
 function App() {
  
+  const [postIDs, setPostIDs] = useState([]);
+
   const getData = async (url) => {
     try {
       const res = await fetch(url);
@@ -15,10 +18,21 @@ function App() {
     }
   }
 
+  const fetchPostMetaData = async (ids) => {
+    const apiCalls = ids.map((id) => {
+      const url = `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`;
+      return getData(url)
+    });
+    const results = await Promise.all(apiCalls);
+    console.log(results);
+  }
+
   const fetchPostIDs = async () => {
     const url = 'https://hacker-news.firebaseio.com/v0/jobstories.json';
     const data = await getData(url);
-    console.log(data)
+    const ids = data.splice(0, 9);
+    setPostIDs(ids);
+    fetchPostMetaData(ids);
   }
 
   useEffect(() => {
