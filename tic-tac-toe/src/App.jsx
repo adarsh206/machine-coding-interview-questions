@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
@@ -19,9 +19,31 @@ function App() {
   }
 
   const decideWinner = () => {
+    //winner chances
+    const lines = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8] , [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]
+    ];
 
+    for(let i = 0; i < lines.length; i++){
+      const [a, b, c] = lines[i];
+      if(matrix[a] && 
+        matrix[a] === matrix[b] &&
+        matrix[a] === matrix[c]
+      ){
+        setWon(matrix[a])
+      }
+    }
   }
   
+  useEffect(() => {
+    decideWinner();
+  } , [matrix])
+
+  const resetGame = () => {
+    setMatrix(Array(9).fill(null));
+    setWon(null);
+    setIsXTurn(true);
+  }
 
   return (
    <div className='App'>
@@ -36,9 +58,9 @@ function App() {
       }
     </div>
     <div className='game-info'>
-        <button>Reset</button>
+        <button className='reset' onClick={resetGame}>Reset</button>
         <div className='next-player'>Next Player: {isXTurn ? 'X' : 'O'}</div>
-        {won && <div className='winner'>Player X won the game</div>}
+        {won && <div className='winner'>Player {won} won the game</div>}
     </div>
    </div>
   )
