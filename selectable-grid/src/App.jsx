@@ -5,8 +5,8 @@ import './App.css'
 function App() {
 
   const [twoDMatrix, setTwoDMatrix] = useState([]); // 100 cells
-  const [start, setStart] = useState();
-  const [end, setEnd] = useState();
+  const [start, setStart] = useState([]);
+  const [end, setEnd] = useState([]);
 
   const prepareTwoDMatrix = () => {
     const matrix = [];
@@ -31,6 +31,7 @@ function App() {
   const handleDrag = (e, pos) => {
     console.log('OnDrag', pos)
     setStart(pos);
+    prepareTwoDMatrix();
   }
 
   const handleOnDragOver = (e, pos) => {
@@ -39,13 +40,31 @@ function App() {
   }
 
 
-  const fillColor = () => {
-    
+  const fillColor = (startPos, endPos) => {
+    const [startRow, startCol] = startPos;
+    const [endRow, endCol] = endPos;
+    const selectedGrid = [];
+
+    for(let i = startRow; i <= endRow; i++){ // sub matrix rows traverse
+      for(let j = startCol; j <= endCol; j++){ // sub matrix cols traverse
+        selectedGrid.push([i, j].join(''))
+      }
+    }
+    let copyMat = [...twoDMatrix];
+    copyMat = copyMat.map((item) => {
+      const { pos } = item;
+      const stringPos = pos.join('');
+      if(selectedGrid.includes(stringPos)){
+        item.isColor = true;
+      }
+      return item;
+    })
+    setTwoDMatrix(copyMat);
   }
 
   useEffect(() => {
     if(start.length > 1 && end.length > 1){
-      fillColor()
+      fillColor(start, end)
     }
   }, [start, end])
 
@@ -56,7 +75,7 @@ function App() {
     <div className="board">
       {
         twoDMatrix?.map((item, i) => (
-          <div key={i} className="cell" draggable onDragOver={(e) => handleOnDragOver(e, item.pos)}
+          <div key={i} className={`cell ${item.isColor && 'selected-cell'}`} draggable onDragOver={(e) => handleOnDragOver(e, item.pos)}
           onDrag={(e) => handleDrag(e, item.pos)}>
             {item.pos}
           </div>
