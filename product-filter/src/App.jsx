@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 import { items } from './item.js';
 
@@ -21,6 +21,20 @@ function App() {
     }
   }
   console.log('activeFilters', activeFilters)
+
+  const filterProducts = () => {
+    if(activeFilters.length > 0){
+      const tempItems = items.filter((item) => activeFilters.includes(item.category))
+      setFilteredData(tempItems);
+    }
+    else{
+      setFilteredData(items)
+    }
+  }
+
+  useEffect(() => {
+    filterProducts()
+  }, [activeFilters])
   
   return (
    <div className="App">
@@ -28,7 +42,7 @@ function App() {
     <div className="filters" onClick={handleFilterClick}>
       {
         filters.map((item, idx) => (
-          <button key={idx} id={item}>
+          <button key={idx} id={item} className={activeFilters.includes(item) ? 'selected' : ''}>
             {item}
           </button>
         ))
