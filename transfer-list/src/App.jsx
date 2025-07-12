@@ -41,7 +41,7 @@ function App() {
         {/** left section */}
         {
           leftItems.map(({ title, id, checked }) => (
-            <div className="item" id={id} key={id} onClick={() => handleClick(id, checked, 'LEFT')}>
+            <div className={`item ${checked && 'checked'}`} id={id} key={id} onClick={() => handleClick(id, checked, 'LEFT')}>
               {title}
             </div>
           ))
@@ -58,7 +58,7 @@ function App() {
         {/** right section */}
         {
           rightItems.map(({ title, id, checked }) => (
-            <div className="item" id={id} key={id} onClick={() => handleClick(id, checked, 'RIGHT')}>
+            <div className={`item ${checked && 'checked'}`} id={id} key={id} onClick={() => handleClick(id, checked, 'RIGHT')}>
               {title}
             </div>
           ))
