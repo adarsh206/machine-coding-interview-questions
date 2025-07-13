@@ -53,14 +53,39 @@ function App() {
 
   const [formData, setFormData] = useState(defaultValues);
 
+  const handleInput = (e) => {
+    const key = e.target.id;
+    const value = e.target.value;
+    console.log(key, value)
+  }
+
   return (
   <div className='App'>
     <h1>Form Validation</h1>
     <div className="container">
       <form>
         <div className="form-item">
-          <label>FirstName</label>
-          <input />
+         {
+          Object.keys(formData).map((key) => {
+            const { id, label, type, placeholder, value, isError, errorMsg } = formData[key];
+            return <div className='form-item'>
+              <label>{label}</label>
+              <input onChange={handleInput}
+              id={id} placeholder={placeholder} type={type} value={value}/>
+              {
+                isError && 
+                <span className='error'>{errorMsg}</span>
+              }
+              {
+                key === 'confirmPassword' && 
+                <span className='error'>Password does not match</span>
+              }
+            </div>
+          })
+         }
+         <div className='form-item'>
+          <button>Submit</button>
+         </div>
         </div>
       </form>
     </div>
