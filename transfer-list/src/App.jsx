@@ -33,6 +33,34 @@ function App() {
     }
   }
 
+  const resetItems = (list) => {
+    return list.map((item) => {
+      return {
+        ...item,
+        checked: false
+      }
+    })
+  }
+
+  const handleTransferBtn = (dir) => {
+    if(dir === 'LEFT_TO_RIGHT'){
+      if(leftItems.length){
+        const copyList = [...leftItems];
+        const checkedList = copyList.filter(item => item.checked);
+        const unCheckedList = copyList.filter(item => !item.checked);
+        setRightItems(resetItems([...rightItems, ...checkedList]));
+        setLeftItems(unCheckedList);
+      }
+    }
+    else{
+       const copyList = [...rightItems];
+        const checkedList = copyList.filter(item => item.checked);
+        const unCheckedList = copyList.filter(item => !item.checked);
+        setLeftItems(resetItems([...leftItems, ...checkedList]));
+        setRightItems(unCheckedList);
+    }
+  }
+
   return (
   <div className='App'>
     <h1>Transfer List</h1>
@@ -50,8 +78,8 @@ function App() {
 
       <div className="actions">
         {/** buttons */}
-        <button>Left</button>
-        <button>Right</button>
+        <button onClick={() => handleTransferBtn('RIGHT_TO_LEFT')}>Left</button>
+        <button onClick={() => handleTransferBtn('LEFT_TO_RIGHT')}>Right</button>
       </div>
 
       <div className="box">
