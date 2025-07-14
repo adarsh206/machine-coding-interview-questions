@@ -56,9 +56,12 @@ function App() {
   const handleInput = (e) => {
     const key = e.target.id;
     const value = e.target.value;
-    console.log(key, value)
+    console.log(key, value);
+    const copyFormData = {...formData};
+    copyFormData[key].value = value;
+    setFormData(copyFormData);
   }
-
+console.log(formData)
   return (
   <div className='App'>
     <h1>Form Validation</h1>
@@ -68,7 +71,7 @@ function App() {
          {
           Object.keys(formData).map((key) => {
             const { id, label, type, placeholder, value, isError, errorMsg } = formData[key];
-            return <div className='form-item'>
+            return <div className='form-item' key={id}>
               <label>{label}</label>
               <input onChange={handleInput}
               id={id} placeholder={placeholder} type={type} value={value}/>
