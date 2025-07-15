@@ -61,12 +61,27 @@ function App() {
     copyFormData[key].value = value;
     setFormData(copyFormData);
   }
-console.log(formData)
+console.log(formData);
+
+  const isValidForm = () => {
+    const copyFormData = {...formData};
+    Object.keys(copyFormData).forEach((key) => {
+      const obj = copyFormData[key];
+      obj.isError = !obj.value ? true : false;
+    })
+    setFormData(copyFormData);
+  }
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    isValidForm();
+  }
+
   return (
-  <div className='App'>
-    <h1>Form Validation</h1>
+  <div className='App'> 
     <div className="container">
-      <form>
+      <h1 className='header'>Form Validation</h1>
+      <form onSubmit={handleFormSubmit}>
         <div className="form-item">
          {
           Object.keys(formData).map((key) => {
