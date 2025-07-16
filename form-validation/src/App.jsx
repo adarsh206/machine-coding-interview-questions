@@ -61,14 +61,20 @@ function App() {
     const copyFormData = {...formData};
     copyFormData[key].value = value;
     setFormData(copyFormData);
+    isValidForm()
   }
 console.log(formData);
+
+  const passwordMatch = () => {
+    
+  }
 
   const isValidForm = () => {
     const copyFormData = {...formData};
     Object.keys(copyFormData).forEach((key) => {
       const obj = copyFormData[key];
       obj.isError = !obj.value ? true : false;
+      passwordMatch();
     })
     setFormData(copyFormData);
   }
@@ -89,7 +95,7 @@ console.log(formData);
             const { id, label, type, placeholder, value, isError, errorMsg } = formData[key];
             return <div className='form-item' key={id}>
               <label>{label}</label>
-              <input onChange={handleInput}
+              <input onChange={handleInput} className={isError && 'error-border'}
               id={id} placeholder={placeholder} type={type} value={value}/>
               {
                 isError && 
