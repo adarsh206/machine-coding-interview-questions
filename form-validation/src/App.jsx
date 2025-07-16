@@ -52,6 +52,7 @@ function App() {
   }
 
   const [formData, setFormData] = useState(defaultValues);
+  const [isPassMatch, setIsPassMatch] = useState(true);
 
   const handleInput = (e) => {
     const key = e.target.id;
