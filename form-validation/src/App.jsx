@@ -53,6 +53,7 @@ function App() {
 
   const [formData, setFormData] = useState(defaultValues);
   const [isPassMatch, setIsPassMatch] = useState(true);
+  const [result, setResult] = useState(false);
 
   const handleInput = (e) => {
     const key = e.target.id;
@@ -63,10 +64,19 @@ function App() {
     setFormData(copyFormData);
     isValidForm()
   }
-console.log(formData);
+
 
   const passwordMatch = () => {
-    
+    const copyFormData = {...formData}
+    const pass = copyFormData['password'].value;
+    const cpass = copyFormData['confirmPassword'].value;
+    if(pass !== cpass){
+      setIsPassMatch(false);
+    }
+    else{
+      setIsPassMatch(true);
+    }
+
   }
 
   const isValidForm = () => {
@@ -77,11 +87,17 @@ console.log(formData);
       passwordMatch();
     })
     setFormData(copyFormData);
+    setResult(true);
   }
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    isValidForm();
+    isValidForm();  
+    if(result){
+      alert("Form Submitted");
+      setFormData(defaultValues);
+      setResult(false);
+    }
   }
 
   return (
@@ -102,7 +118,7 @@ console.log(formData);
                 <span className='error'>{errorMsg}</span>
               }
               {
-                key === 'confirmPassword' && 
+                key === 'confirmPassword' && !isPassMatch &&
                 <span className='error'>Password does not match</span>
               }
             </div>
