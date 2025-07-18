@@ -1,14 +1,47 @@
 
 import { useState } from 'react'
 import './App.css'
+import Comment from './Comment';
 
 function App() {
 
   const [input, setInput] = useState('');
+  const [comments, setComments] = useState([
+        {
+            id: 1,
+            display: 'Hello',
+            children: [
+                {
+                    id: 10,
+                    display: 'Very nice',
+                    children: [
+                        {
+                            id: 11,
+                            display: 'Awesome :)',
+                            children: [
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 2,
+            display: 'Amazing',
+            children: []
+        }
+    ])
   
   const handleInputChange = (e) => {
-    console.log(e.target.value)
     setInput(e.target.value)
+  }
+
+  const handleNewComment = () => {
+
+  }
+
+  const addReply = () => {
+    
   }
 
   return (
@@ -22,12 +55,16 @@ function App() {
 
    {/** Handle Button */}
    <div>
-
+    <button className='comment-button' onClick={handleNewComment}>Comment</button>
    </div>
 
    {/** Nested Comments */}
-   <div>
-
+   <div className='comments'>
+    {
+      comments.map((item) => (
+        <Comment key={item.id} comment={item} addReply={addReply}/>
+      ))
+    }
    </div>
   </div>
   )
