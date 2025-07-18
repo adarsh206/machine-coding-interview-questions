@@ -36,12 +36,23 @@ function App() {
     setInput(e.target.value)
   }
 
-  const handleNewComment = () => {
+  const newComment = (text) => {
+    return {
+      id: new Date().getTime(),
+      display: text,
+      children: []
+    }
+  }
 
+  const handleNewComment = (e) => {
+    if(input){
+      setComments([...comments, newComment(input)]);
+      setInput('');
+    }
   }
 
   const addReply = () => {
-    
+
   }
 
   return (
