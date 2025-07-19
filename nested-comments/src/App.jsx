@@ -63,7 +63,15 @@ function App() {
       let comment = comments[i];
       if(comment.id === parentId){
         console.log('----found object', parentId, text);
+        comment.children.unshift(newComment(text));
       }
+    }
+
+    {/** Going for nested check parent and children */}
+    for(let i = 0; i < comments.length; i++){
+      let comment = comments[i];
+      console.log('---- children -parentId ----', parentId);
+      addComments(comment.children, parentId, text);
     }
   }
 

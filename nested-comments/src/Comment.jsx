@@ -51,7 +51,7 @@ const Comment = ({ comment, addReply}) => {
                     onChange={(e) => setReplyText(e.target.value)}
                     onKeyDown={(e) => handleKeyDown(e, comment.id)}/>
                     <br />
-                    <button className='btn' onClick={handleReplySave}>
+                    <button className='btn' onClick={() => handleReplySave(comment.id)}>
                         Save
                     </button>
 
