@@ -13,6 +13,23 @@ const Comment = ({ comment, addReply}) => {
         }, 1)
     }
 
+    const handleCancelButton = () => {
+        setShowReplyBox(false);
+        setReplyText('');
+    }
+
+    const handleReplySave = () => {
+
+    }
+
+    const handleKeyDown = (e, commentId) => {
+        if(e.key === 'Enter'){
+            handleReplySave(commentId);
+        }
+        else if(e.key === 'Escape'){
+            handleCancelButton();
+        }
+    }
    
   return (
     <li key={comment.id} className='comment-line'>
@@ -28,13 +45,14 @@ const Comment = ({ comment, addReply}) => {
                 <>
                     <br />
                     <input type='text' ref={inputRef} value={replyText}
-                    onChange={(e) => setReplyText(e.target.value)}/>
+                    onChange={(e) => setReplyText(e.target.value)}
+                    onKeyDown={(e) => handleKeyDown(e, comment.id)}/>
                     <br />
                     <button className='btn'>
                         Save
                     </button>
 
-                    <button className="btn">
+                    <button className="btn" onClick={handleCancelButton}>
                         Cancel
                     </button>
                 </>
