@@ -51,8 +51,20 @@ function App() {
     }
   }
 
-  const addReply = () => {
+  const addReply = (parentId, text) => {
+    console.log('----App----', parentId, text);
+    const copyComments =  [...comments];
+    addComments(copyComments, parentId, text);
+  }
 
+  const addComments = (comments, parentId, text) => {
+
+    for(let i = 0; i < comments.length; i++){
+      let comment = comments[i];
+      if(comment.id === parentId){
+        console.log('----found object', parentId, text);
+      }
+    }
   }
 
   return (

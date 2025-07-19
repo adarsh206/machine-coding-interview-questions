@@ -18,8 +18,11 @@ const Comment = ({ comment, addReply}) => {
         setReplyText('');
     }
 
-    const handleReplySave = () => {
-
+    const handleReplySave = (commentId) => {
+        console.log('----save----', commentId, replyText)
+        addReply(commentId, replyText)
+        setShowReplyBox(false);
+        setReplyText('');
     }
 
     const handleKeyDown = (e, commentId) => {
@@ -48,7 +51,7 @@ const Comment = ({ comment, addReply}) => {
                     onChange={(e) => setReplyText(e.target.value)}
                     onKeyDown={(e) => handleKeyDown(e, comment.id)}/>
                     <br />
-                    <button className='btn'>
+                    <button className='btn' onClick={handleReplySave}>
                         Save
                     </button>
 
