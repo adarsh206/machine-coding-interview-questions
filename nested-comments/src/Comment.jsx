@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 const Comment = ({ comment, addReply}) => {
 
     const [showReplybox, setShowReplyBox] = useState(false);
+    const [replyText, setReplyText] = useState('');
+    const inputRef = useRef(null);
 
     const handleReply = () => {
         setShowReplyBox(true);
+        setTimeout(() => {
+            inputRef.current.focus();
+        }, 1)
     }
+
+   
   return (
     <li key={comment.id} className='comment-line'>
         {comment.display}
@@ -20,7 +27,8 @@ const Comment = ({ comment, addReply}) => {
             showReplybox ? (
                 <>
                     <br />
-                    <input type='text'/>
+                    <input type='text' ref={inputRef} value={replyText}
+                    onChange={(e) => setReplyText(e.target.value)}/>
                     <br />
                     <button className='btn'>
                         Save
