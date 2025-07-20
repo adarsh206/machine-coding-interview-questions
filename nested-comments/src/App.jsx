@@ -80,7 +80,7 @@ function App() {
    <h1>Nested Comments</h1>
    {/** input box */}
    <div>
-      <input type='text' placeholder='Your Comments...' className='input-box'
+      <input type='text' placeholder='Write Your Comments...' className='input-box'
       onChange={handleInputChange} value={input}/>
    </div>
 
