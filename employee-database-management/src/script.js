@@ -24,6 +24,10 @@
         }
     })
 
+      // Set Employee age to be entered minimum 18 years
+    const dobInput = document.querySelector(".addEmployee_create--dob");
+    dobInput.max = `${new Date().getFullYear() - 18}-${new Date().toISOString().slice(5, 10)}`  
+
     addEmployeeForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
@@ -33,7 +37,15 @@
 
         values.forEach((val) => {
             empData[val[0]] = val[1];
-        })
+        });
+
+        empData.id = employees[employees.length - 1].id + 1;
+        empData.age = new Date().getFullYear() - parseInt(empData.dob.slice(0, 4), 10);
+        empData.imageUrl = empData.imageUrl || "https://cdn-icons-png.flaticon.com/512/0/93.png";
+         employees.push(empData);
+        renderEmployees();
+        addEmployeeForm.reset();
+        addEmployeeModal.style.display = "none";
     })
 
 
@@ -44,6 +56,20 @@
             renderEmployees()
             renderSingleEmployee();
         }
+
+        // Employee Delete Logic
+    if (e.target.tagName === "I") {
+      employees = employees.filter(
+        (emp) => String(emp.id) !== e.target.parentNode.id
+      );
+
+      if (String(selectedEmployeeId) === e.target.parentNode.id) {
+        selectedEmployeeId = employees[0]?.id || -1;
+        selectedEmployee = employees[0] || {};
+        renderSingleEmployee();
+      }
+      renderEmployees();
+    }
     })
 
     const renderEmployees = () => {
