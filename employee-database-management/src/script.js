@@ -10,9 +10,41 @@
     const employeeInfo = document.querySelector(".employees__single--info");
 
     // Add Employee Logic
+    const createEmployee = document.querySelector(".createEmployee");
+    const addEmployeeModal = document.querySelector(".addEmployee");
+    const addEmployeeForm = document.querySelector(".addEmployee_create");
+
+    createEmployee.addEventListener("click", () => {
+        addEmployeeModal.style.display = "flex";
+    });
+
+    addEmployeeModal.addEventListener("click", (e) => {
+        if(e.target.className === 'addEmployee'){
+            addEmployeeModal.style.display = "none";
+        }
+    })
+
+    addEmployeeForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(addEmployeeForm);
+        const values = [...formData.entries()];
+        let empData = {};
+
+        values.forEach((val) => {
+            empData[val[0]] = val[1];
+        })
+    })
 
 
     // Select Employee Logic
+    employeeList.addEventListener("click", (e) => {
+        if(e.target.tagName === "SPAN" && selectedEmployeeId !== e.target.id){
+            selectedEmployeeId = e.target.id;
+            renderEmployees()
+            renderSingleEmployee();
+        }
+    })
 
     const renderEmployees = () => {
         employeeList.innerHTML = "";
@@ -33,6 +65,27 @@
         });
     }
 
-    // Render Single Employee
+     // Render Single Employee Logic - START
+  const renderSingleEmployee = () => {
+    // Employee Delete Logic - START
+    if (selectedEmployeeId === -1) {
+      employeeInfo.innerHTML = "";
+      return;
+    }
+    // Employee Delete Logic - END
+
+    employeeInfo.innerHTML = `
+      <img src="${selectedEmployee.imageUrl}" />
+      <span class="employees__single--heading">
+      ${selectedEmployee.firstName} ${selectedEmployee.lastName} (${selectedEmployee.age})
+      </span>
+      <span>${selectedEmployee.address}</span>
+      <span>${selectedEmployee.email}</span>
+      <span>Mobile - ${selectedEmployee.contactNumber}</span>
+      <span>DOB - ${selectedEmployee.dob}</span>
+    `;
+  };
+  // Render Single Employee Logic - END
+
     renderEmployees();
 })();
