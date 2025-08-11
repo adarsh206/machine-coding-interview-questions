@@ -5,17 +5,45 @@ import './App.css'
 function App() {
 
   const [isStart, setIsStart] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [timerId, setTimerId] = useState(0);
 
   const handleStart = () => {
-    setIsStart(true);
+
+    if(hours < 0 || minutes < 0 || seconds < 0){
+      alert("Invalid Input");
+      return;
+    }
+    else{
+      setIsStart(true);
+    }
+
+  }
+
+  const handleResume = () => {
+    setIsPaused(false);
+    runTimer(seconds, minutes, hours, timerId);
+  }
+
+  const handlePause = () => {
+    setIsPaused(true);
+    clearInterval(timerId)
   }
 
   const handleReset = () => {
     setIsStart(false);
+    resetTimer();
+    
+  }
+
+  const resetTimer = () => {
+    setHours(0);
+    setMinutes(0);
+    setSeconds(0);
+    clearInterval(timerId);
   }
 
   const handleInput = (e) => {
@@ -34,13 +62,39 @@ function App() {
     }
   }
 
+  const runTimer = (sec, min, hr, tid) => {
+    if(sec > 0){
+      setSeconds((s) => s - 1);
+    }
+    else if(sec === 0 && min > 0){
+      setMinutes((m) => m - 1);
+      setSeconds(59);
+    }
+    else{
+      setHours((h) => h - 1);
+      setMinutes(59);
+      setSeconds(59);
+    }
+
+    if(sec === 0 && min === 0 && hr === 0){
+      handleReset();
+      alert("Timer is finished");
+      clearInterval(tid);
+      return
+    }
+  }
+
   useEffect(() => {
     let tid;
     if(isStart){
       tid = setInterval(() => {
-
+        runTimer(seconds, minutes, hours, tid)
       }, 1000)
       setTimerId(tid)
+    }
+
+    return () => {
+      clearInterval(tid);
     }
   }, [isStart, hours, minutes, seconds])
 
@@ -64,15 +118,21 @@ function App() {
       isStart && (
         <div className="show-container">
           <div className="timer-box">
-            <div>10</div>
+            <div>{hours < 10 ? `0${hours}` : hours}</div>
             <span>:</span>
-            <div>11</div>
+            <div>{minutes < 10 ? `0${minutes}` : minutes}</div>
             <span>:</span>
-            <div>12</div>
+            <div>{seconds < 10 ? `0${seconds}` : seconds}</div>
           </div>
 
           <div className="action-box">
-            <button className='timer-button'>Pause</button>
+            {
+              !isPaused && <button className='timer-button' onClick={handlePause}>Pause</button>
+            }
+             {
+              isPaused && <button className='timer-button' onClick={handleResume}>Resume</button>
+            }
+            
             <button className='timer-button' onClick={handleReset}>Reset</button>
           </div>
         </div>
