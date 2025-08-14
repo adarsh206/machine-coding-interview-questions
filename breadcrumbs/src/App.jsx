@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from './pages/Home'
 import ProductListing from './pages/ProductListing'
 import ProductDetails from './pages/ProductDetails'
+import Breadcrumbs from './components/Breadcrumbs'
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <div className='App'>
         <h1>Breadcrumbs</h1>
         {/** Breadcrumbs */}
+        <Breadcrumbs />
         {/** Routes */}
         <Routes>
           <Route path='/' element={<Home />} />
