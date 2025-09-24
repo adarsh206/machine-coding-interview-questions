@@ -19,8 +19,13 @@ const CinemaSeatBooking = ({
 
 }) => {
   return (
-    <div>
+    <div className='w-full min-h-screen bg-gray-50 p-4'>
       {/** title */}
+      <div className='max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-6'>
+        <h1 className='text-2xl lg:text-3xl font-bold text-center mb-2 text-gray-800'>{title}</h1>
+        <p className='text-center text-2xl text-gray-600 mb-6'>{subtitle}</p>
+      </div>
+      
       {/** screen */}
       {/** seat map */}
       {/** legend */}
