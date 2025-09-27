@@ -19,12 +19,40 @@ const CinemaSeatBooking = ({
 
 }) => {
 
+  const getSeatType = () => {
+    // TODO : Implement seat type logic based on row
+  }
+
   const initializeSeats = useMemo(() => {
     const seats = [];
+    for(let row = 0; row < layout.rows; row++){
+      const seatRow = [];
+      const seatTypeInfo  = getSeatType(row);
+
+      for(let seat = 0; seat < layout.seatsPerRow; seat++){
+        const seatId = `${String.fromCharCode(65 + row)}${seat + 1}`;
+
+        seatRow.push({
+          id: seatId,
+          row,
+          seat,
+          type: seatTypeInfo?.type || "regular",
+          price: seatTypeInfo?.price || 150,
+          color: seatTypeInfo?.color || "blue",
+          status: bookedSeats.includes(seatId) ? "booked" : "available",
+          selected: false,
+        })
+      }
+      seats.push(seatRow)
+    }
+
+    return seats;
     
   }, [layout, seatTypes, bookedSeats]);
 
+
   const [seats, setSeats] = useState(initializeSeats);
+
   return (
     <div className='w-full min-h-screen bg-gray-50 p-4'>
       {/** title */}
@@ -39,12 +67,21 @@ const CinemaSeatBooking = ({
           mb-2 shadow-inner'/>
           <p className='text-center text-sm text-gray-500 font-medium'>SCREEN</p>
         </div>
-      </div>
+      
+
       {/** seat map */}
       <div className='mb-6 overflow-x-auto'>
         <div className='flex flex-col items-center min-w-max'>
-          {
-
+          { 
+            seats.map((row, rowIndex) => {
+              return (
+                <div key={rowIndex} className='flex items-center mb-2'>
+                  <span className='w-8 text-center font-bold text-gray-600 mr-4'>
+                    {String.fromCharCode(65 + rowIndex)}
+                  </span>
+                </div>
+              )
+            })
           }
         </div>
       </div>
@@ -52,6 +89,7 @@ const CinemaSeatBooking = ({
       {/** summary */}
       {/** Book Button */}
     </div>
+  </div>
   )
 }
 
