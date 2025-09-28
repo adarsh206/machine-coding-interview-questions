@@ -53,6 +53,27 @@ const CinemaSeatBooking = ({
 
   const [seats, setSeats] = useState(initializeSeats);
 
+  const getSeatClassName = (seat) => {
+    return "w-8 h-8 sm:w-10 lg:w-12 lg:h-12 m-1 rounded-t-lg border-2 cursor-pointer" + 
+    "transition-all duration-200 flex items-center justify-center text-xs sm:text-sm font-bold" +
+    "bg-blue-100 border-blue-300 text-blue-800";
+
+    // more conditions
+  };
+
+  const renderSeatSection = (seatRow, startIndex, endIndex) => {
+    return (
+    <div className='flex'>
+      {seatRow.slice(startIndex, endIndex).map((seat, index) => {
+        return <div className={getSeatClassName(seat)} key={seat.id}>
+          {" "}
+          {startIndex + index + 1}
+        </div>
+      })}
+    </div>
+    )
+  }
+
   return (
     <div className='w-full min-h-screen bg-gray-50 p-4'>
       {/** title */}
@@ -79,6 +100,9 @@ const CinemaSeatBooking = ({
                   <span className='w-8 text-center font-bold text-gray-600 mr-4'>
                     {String.fromCharCode(65 + rowIndex)}
                   </span>
+                  {renderSeatSection(row, 0, layout.aislePosition)}
+                  {/** aisle */}
+                  {renderSeatSection(row, layout.aislePosition, layout.seatsPerRow)}
                 </div>
               )
             })
