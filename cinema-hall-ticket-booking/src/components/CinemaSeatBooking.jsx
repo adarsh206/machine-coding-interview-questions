@@ -19,10 +19,34 @@ const CinemaSeatBooking = ({
 
 }) => {
 
-  const getSeatType = () => {
+  const colors = [
+    "blue",
+    "purple",
+    "yellow",
+    "green",
+    "red",
+    "indigo",
+    "pink",
+    "gray"
+  ];
+
+  const getSeatType = (row) => {
     // TODO : Implement seat type logic based on row
     const seatTypeEntries = Object.entries(seatTypes);
+
+    for(let i = 0;  i < seatTypeEntries.length; i++){
+      const [type, config] = seatTypeEntries[i];
+
+      if(config.rows.includes(row)){
+        const color =  colors[i % colors.length];
+        return { type, color, ...config };
+      }
+    }
+
+    const [firstType, firstConfig] = seatTypeEntries[0];
+    return { type: firstType, color: colors[0], ...firstConfig };
   }
+
 
   const initializeSeats = useMemo(() => {
     const seats = [];
@@ -55,11 +79,23 @@ const CinemaSeatBooking = ({
   const [seats, setSeats] = useState(initializeSeats);
   const [selectedSeats, setSelectedSeats] = useState([]);
 
+  const getColorClass = (colorName) => {
+
+  }
+
   const getSeatClassName = (seat) => {
-    return "w-8 h-8 sm:w-10 lg:w-12 lg:h-12 m-1 rounded-t-lg border-2 cursor-pointer" + 
+    const baseClass =  "w-8 h-8 sm:w-10 lg:w-12 lg:h-12 m-1 rounded-t-lg border-2 cursor-pointer" + 
     " transition-all duration-200 flex items-center justify-center text-xs sm:text-sm font-bold" +
     " bg-blue-100 border-blue-300 text-blue-800";
 
+    if(seat.status === "booked"){
+      return `${baseClass} bg-gray-400 border-gray-500 text-gray-600 cursor-not-allowed`;
+    }
+
+    if(seat.selected){
+      return `${baseClass} bg-green-500 border-green-600 text-white transform scale-110`;
+    }
+    return `${baseClass} ${getColorClass(seat.color)}`;
     // more conditions
   };
 
