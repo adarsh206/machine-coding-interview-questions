@@ -80,7 +80,17 @@ const CinemaSeatBooking = ({
   const [selectedSeats, setSelectedSeats] = useState([]);
 
   const getColorClass = (colorName) => {
-
+    const colorMap = {
+      blue: "bg-blue-100 border-blue-300 text-blue-800 hover:bg-blue-200",
+      purple: "bg-purple-100 border-purple-300 text-purple-800 hover:bg-purple-200",
+      yellow: "bg-yellow-100 border-yellow-300 text-yellow-800 hover:bg-yellow-200",
+      green: "bg-green-100 border-green-300 text-green-800 hover:bg-green-200",
+      red: "bg-red-100 border-red-300 text-red-800 hover:bg-red-200",
+      indigo: "bg-indigo-100 border-indigo-300 text-indigo-800 hover:bg-indigo-200",
+      pink: "bg-pink-100 border-pink-300 text-pink-800 hover:bg-pink-200",
+      gray: "bg-gray-100 border-gray-300 text-gray-800 hover:bg-gray-200",
+    }
+    return colorMap[colorName] || colorMap.blue;
   }
 
   const getSeatClassName = (seat) => {
@@ -119,6 +129,14 @@ const CinemaSeatBooking = ({
     )
   }
 
+  const uniqueSeatTypes = Object.entries(seatTypes).map(([type, config], index) => {
+    return {
+      type,
+      color: colors[index %colors.length],
+      ...config
+    }
+  })
+
   return (
     <div className='w-full min-h-screen bg-gray-50 p-4'>
       {/** title */}
@@ -156,6 +174,11 @@ const CinemaSeatBooking = ({
         </div>
       </div>
       {/** legend */}
+      <div className='flex flex-wrap justify-center gap-6 mb-6 p-4 bg-gray-50 rounded-lg'>
+          {
+            
+          }
+      </div>
       {/** summary */}
       {/** Book Button */}
     </div>
