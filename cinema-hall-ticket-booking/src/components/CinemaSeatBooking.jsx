@@ -176,8 +176,27 @@ const CinemaSeatBooking = ({
       {/** legend */}
       <div className='flex flex-wrap justify-center gap-6 mb-6 p-4 bg-gray-50 rounded-lg'>
           {
-            
+            uniqueSeatTypes.map((seatType) => {
+              return (
+              <div key={seatType.type} className='flex items-center'>
+                <div className={`w-6 h-6 border-2 rounded-t-lg mr-2 ${getColorClass(seatType.color) || "bg-blue-100 border-blue-300"}`}>
+                </div>
+                <span>
+                  {seatType.name} ({currency}
+                  {seatType.price})
+                </span>
+              </div>
+              )
+            })
           }
+          <div className='flex items-center'>
+            <div className='w-6 h-6 bg-green-500 border-green-600 rounded-t-lg mr-2'></div>
+            <span>Booked</span>
+          </div>
+          <div className='flex items-center'>
+            <div className='w-6 h-6 bg-gray-500 border-gray-600 rounded-t-lg mr-2'></div>
+            <span>Selected</span>
+          </div>
       </div>
       {/** summary */}
       {/** Book Button */}
