@@ -109,8 +109,9 @@ const CinemaSeatBooking = ({
     // more conditions
   };
 
-  const handleSeatClick = () => {
-
+  const handleSeatClick = (rowIndex, seatIndex) => {
+    const seat = seats[rowIndex][seatIndex];
+    if(seat.status === "booked") return;
   }
 
 
