@@ -112,6 +112,25 @@ const CinemaSeatBooking = ({
   const handleSeatClick = (rowIndex, seatIndex) => {
     const seat = seats[rowIndex][seatIndex];
     if(seat.status === "booked") return;
+
+    const isCurrentlySelected = seat.selected;
+
+    setSeats((prevSeats) => {
+      return prevSeats.map((row, rIdx) => 
+      row.map((s, sIdx) => {
+        if(rIdx === rowIndex && sIdx === seatIndex){
+          return {...s, selected: !s.selected};
+        }
+        return s;
+      }))
+    })
+
+    if(isCurrentlySelected){
+      setSelectedSeats((prev) => prev.filter((s) => s.id !== seat.id));
+    }
+    else{
+      setSelectedSeats((prev) => [...prev, seat]);
+    }
   }
 
 
