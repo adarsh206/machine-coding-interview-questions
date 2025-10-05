@@ -219,6 +219,16 @@ const CinemaSeatBooking = ({
           </div>
       </div>
       {/** summary */}
+      <div className='bg-gray-50 rounded-lg p-4 mb-4'>
+          <h3 className='font-bold text-lg mb-2'>Booking Summary</h3>
+          {
+            selectedSeats.length > 0 ? (
+              <div></div>
+            ) : (
+              <p className='text-gray-500'>No Seats Selected</p>
+            )
+          }
+      </div>
       {/** Book Button */}
     </div>
   </div>
