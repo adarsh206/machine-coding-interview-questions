@@ -161,6 +161,10 @@ const CinemaSeatBooking = ({
     return selectedSeats.reduce((total, seat) => total + seat.price, 0);
   }
 
+  const handleBooking = () => {
+
+  }
+
   return (
     <div className='w-full min-h-screen bg-gray-50 p-4'>
       {/** title */}
@@ -249,6 +253,15 @@ const CinemaSeatBooking = ({
           }
       </div>
       {/** Book Button */}
+      <button onClick={handleBooking} disabled={selectedSeats.length === 0}
+      className={`w-full py-3 px-6 rounded-lg font-bold text-lg transition-all duration-200 ${
+      selectedSeats.length > 0 ? "bg-green-500 hover:bg-green-600 text-white transform hover:scale-105 cursor-pointer" :
+      "bg-gray-300 text-gray-500 cursor-not-allowed"}`}>
+        {
+          selectedSeats.length > 0 ? `Book ${selectedSeats.length} Seat(s) - ${currency}${getTotalPrice()}` :
+          "Select Seats to Book"
+        }
+      </button>
     </div>
   </div>
   )
