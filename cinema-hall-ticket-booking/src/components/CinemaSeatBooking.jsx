@@ -162,7 +162,19 @@ const CinemaSeatBooking = ({
   }
 
   const handleBooking = () => {
-
+    if(selectedSeats.length === 0){
+      alert("Please select atleast one seat to book.");
+      return;
+    }
+    setSeats((prevSeats) => {
+      return prevSeats.map((row) => 
+      row.map((seat) => {
+        if(selectedSeats.some((selected) => selected.id === seat.id)){
+          return {...seat, status: "booked", selected: false };
+        }
+        return seat;
+      }))
+    })
   }
 
   return (
