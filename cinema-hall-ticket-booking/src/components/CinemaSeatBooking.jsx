@@ -175,6 +175,16 @@ const CinemaSeatBooking = ({
         return seat;
       }))
     })
+
+    // call callback
+    onBookingComplete({
+      seats: selectedSeats,
+      totalPrice: getTotalPrice(),
+      seatIds: selectedSeats.map((seat) => seat.id),
+    })
+
+    alert(`Successfully booked ${selectedSeats.length} seat(s) for ${currency}${getTotalPrice()}`);
+    setSelectedSeats([]);
   }
 
   return (

@@ -14,7 +14,9 @@ function App() {
     regular: { name: "Regular", price: 150, rows: [0, 1, 2]},
     premium: { name: "Premium", price: 250, rows: [3, 4, 5]},
     vip: { name: "VIP", price: 150, rows: [6, 7]},
-  }} />
+  }} 
+  onBookingComplete={(booking) => console.log(booking)}
+  />
 }
 
 export default App
