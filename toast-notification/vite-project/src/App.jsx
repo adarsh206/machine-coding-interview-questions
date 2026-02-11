@@ -1,5 +1,6 @@
 
 import './App.css'
+import Notification from './components/notification'
 
 function App() {
 
@@ -8,6 +9,7 @@ function App() {
   return (
     <div>
       <h1>Toast Notification</h1>
+      <Notification type='success' message={"Success Message"}/>
     </div>
   )
 }
