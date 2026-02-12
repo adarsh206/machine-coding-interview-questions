@@ -1,15 +1,22 @@
 
 import './App.css'
 import Notification from './components/notification'
+import useNotification from './hooks/use-notification'
 
 function App() {
 
   // custom hook - useNotification(position)
+  const { NotificationComponent, triggerNotification } = useNotification("top-right")
 
   return (
     <div>
       <h1>Toast Notification</h1>
-      <Notification type='success' message={"Success Message"}/>
+      <button onClick={() => triggerNotification({
+        type : "success",
+        message : "File sent successfully!",
+        duration : 3000,
+      })}>Trigger Success</button>
+      {NotificationComponent}
     </div>
   )
 }
