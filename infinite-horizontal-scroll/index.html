@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1 style="text-align: center">Infinite Horizontal Scroll Animation</h1>
-    <div class="scroller">
+    <div class="scroller" data-direction="left">
         <!-- <marquee behavior="" direction=""></marquee> -->
         <ul class="tag-list scroller_inner">
             <li>HTML</li>
@@ -18,8 +18,43 @@
             <li>WebDev</li>
             <li>animation</li>
             <li>UI/UX</li>
-        </ul>
-        
+        </ul>       
+    </div>
+
+    <div class="scroller"  data-direction="right">
+        <!-- <marquee behavior="" direction=""></marquee> -->
+        <ul class="tag-list scroller_inner">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JS</li>
+            <li>SSG</li>
+            <li>WebDev</li>
+            <li>animation</li>
+            <li>UI/UX</li>
+        </ul>       
+    </div>
+
+    
+    <div class="scroller" data-direction="left" data-speed="slow">
+        <div class="scroller_inner">
+            <img src="https://i.pravatar.cc/150?img=1" alt="" />
+            <img src="https://i.pravatar.cc/150?img=2" alt="" />
+            <img src="https://i.pravatar.cc/150?img=3" alt="" />
+            <img src="https://i.pravatar.cc/150?img=4" alt="" />
+            <img src="https://i.pravatar.cc/150?img=5" alt="" />
+            <img src="https://i.pravatar.cc/150?img=6" alt="" />
+        </div>
+    </div>
+
+    <div class="scroller" data-direction="right" data-speed="fast">
+        <div class="scroller_inner">
+            <img src="https://i.pravatar.cc/150?img=1" alt="" />
+            <img src="https://i.pravatar.cc/150?img=2" alt="" />
+            <img src="https://i.pravatar.cc/150?img=3" alt="" />
+            <img src="https://i.pravatar.cc/150?img=4" alt="" />
+            <img src="https://i.pravatar.cc/150?img=5" alt="" />
+            <img src="https://i.pravatar.cc/150?img=6" alt="" />
+        </div>
     </div>
 
     <script src="script.js"></script>
