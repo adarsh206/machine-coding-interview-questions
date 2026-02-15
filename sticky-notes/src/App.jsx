@@ -11,7 +11,9 @@ const colors = [
   "#fe9b71",
   "#b592fd",
   "#00d4fe",
-  "#e3ee8e"
+  "#e3ee8e",
+  "#7F00FF",
+  "#FF0000"
 ]
 
 function App() {
@@ -53,13 +55,14 @@ function App() {
             />
           </Form.Item>
           
-          <div className='flex gap-2 mb-8'>
+          <div className='flex gap-3 mb-8'>
              {
               colors.map((color, index) => (
                 <button type='button' style={{background: color}} onClick={() => setSelectedColor(color)}
-                key={index} className='hover:scale-120 bg-slate-900 text-white w-8 h-8 flex items-center justify-center cursor-pointer rounded-full hover:bg-slate-950 active:scale-80 transition duration-200' />
+                key={index} className={`${selectedColor === color ? "scale-140 border-2 shadow" : ""} hover:scale-120 bg-slate-900 text-white w-8 h-8 flex items-center justify-center cursor-pointer rounded-full hover:bg-slate-950 active:scale-80 transition duration-200`} />
               ))
             }
+      
           </div>
 
           <Form.Item>
