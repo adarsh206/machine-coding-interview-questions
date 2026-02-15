@@ -12,7 +12,6 @@ function App() {
     const u = new URL(url);
     const hostParts = u.hostname.split(".");
 
-    console.log(u);
 
     let subdomain = "";
     let domain = "";
@@ -35,11 +34,12 @@ function App() {
       subdomain,
       domain,
       path : u.pathname,
-      query,
       host : u.host,
-      hostname : u.hostname
+      hostname : u.hostname,
+      query
     }
     console.log(payload);
+    setData(payload);
   }
 
   return (
@@ -51,6 +51,33 @@ function App() {
         type='url' required className='border border-gray-300 rounded p-3 w-full' placeholder='https://www.example.com'/>
         <button className='mt-4 bg-blue-500 cursor-pointer text-white font-medium rounded px-8 py-3 hover:bg-blue-600 active:scale-80 transition duration-300'>Submit</button>
       </form>
+
+      <div className='grid grid-cols-2 gap-8 mt-6'>
+      {
+        data && Object.keys(data).map((item, index) => {
+
+          const type = typeof data[item];
+          const newData = type === "string" ? data[item] : JSON.stringify(data[item], null, 2);
+
+          return type === "string" ? (
+             <div key={index} className='bg-white shadow border border-gray-200 rounded-lg p-4'>
+              <h1 className='text-lg font-medium capitalize'>{item}</h1>
+              <p className='text-gray-500'>{newData}</p>
+            </div>
+          ) 
+          :
+          (
+            <div className='bg-white shadow border border-gray-200 rounded-lg p-4 col-span-2'>
+              <h1 className='text-lg font-medium capitalize mb-4'>{item}</h1>
+              <textarea className='text-gray-600 w-full border border-gray-200 shadow rounded-lg p-4 h-[300px]'>
+                {newData}
+            </textarea>
+            </div>
+            
+          )      
+})
+      }
+      </div>
     </div>
   </div>
   )
