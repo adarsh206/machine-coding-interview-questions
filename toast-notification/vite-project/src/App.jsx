@@ -37,7 +37,7 @@ function App() {
         pos : "bottom-right",
         message : "File contains sensitive information.",
         duration : 3000,
-      })}>Trigger Error</button>
+      })}>Trigger Info</button>
       {NotificationComponent}
     </div>
   )
