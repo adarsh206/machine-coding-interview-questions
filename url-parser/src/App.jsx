@@ -11,14 +11,31 @@ function App() {
     e.preventDefault();
     const u = new URL(url);
     const hostParts = u.hostname.split(".");
-    console.log(hostParts)
+
     console.log(u);
+
+    let subdomain = "";
+    let domain = "";
+
+    if(hostParts.length > 2){
+      subdomain = hostParts[0];
+      domain = hostParts.slice(1).join(".");
+    }
+    else{
+      domain = u.hostname;
+    }
+
+    const query = {};
+    u.searchParams.forEach((value, key) => {
+      query[key] = value;
+    })
+
     const payload = {
       protocol : u.protocol.replace(":", ""),
-      subdomain : "",
-      domain : "",
-      path : "",
-      query : "",
+      subdomain,
+      domain,
+      path : u.pathname,
+      query,
       host : u.host,
       hostname : u.hostname
     }
