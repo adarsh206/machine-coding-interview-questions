@@ -1,17 +1,24 @@
 
 import './App.css'
 import '@ant-design/v5-patch-for-react-19';
-import { Button, Card, Form, Input, InputNumber, Select, Tooltip } from 'antd';
+import { Button, Card, Empty, Form, Input, InputNumber, message, Select, Tooltip } from 'antd';
 import { Copy } from 'lucide-react'
 import { faker } from '@faker-js/faker';
+import { nanoid } from "nanoid"
+import { useState } from 'react';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 
 
 function App() {
  
+  const [payload, setPayload] = useState("");
+
+  // generate user data
   const generateUser = () => {
     return {
-      id : Date.now(),
+        id : nanoid(),
         fullname : faker.person.fullName(),
         email : faker.internet.email(),
         mobile : faker.phone.number({ style: 'international'}),
@@ -20,22 +27,48 @@ function App() {
         city : faker.location.city(),
         state : faker.location.state(),
         country : faker.location.country(),
-        pincode : faker.location.zipCode()
+        pincode : faker.location.zipCode(),
+        createdAt : faker.date.anytime()
       
     }
   }
 
-
-  const generateData = (values) => {
-    console.log(values)
-    if(values.data == "users"){
-      const users = generateUser();
-      console.log(users)
+  // generate products data
+  const generateProducts = () => {
+    return {
+        id : nanoid(),
+        title : faker.commerce.productName(),
+        description : faker.commerce.productDescription(),
+        price : Number(faker.commerce.price()),
+        discount : Number(faker.commerce.price({ min : 0, max : 50 })),
+        rating : Number(faker.commerce.price({ min : 1, max : 5 })),
+        category : faker.commerce.productAdjective(),
+        brand : faker.company.buzzNoun(),
+        image : faker.image.urlLoremFlickr({ category : 'product'}),
+        createdAt : faker.date.anytime()
+      
     }
   }
 
-  const onCopy = () => {
+  const generateData = (values) => {
 
+    const tmp = [];
+    for(let i = 0; i < values.noOfData; i++){
+      if(values.data === "users"){
+        tmp.push(generateUser());
+      }
+      else if(values.data === "products"){
+        tmp.push(generateProducts());
+      }
+    }
+
+    const str = JSON.stringify(tmp, null, 4);
+    setPayload(str);
+  }
+
+  const onCopy = () => {
+    navigator.clipboard.writeText(payload);
+    message.success("Data copied");
   }
 
   return (
@@ -73,12 +106,18 @@ function App() {
           </Form>
         </Card>
 
-        <Card title="Users" extra={
-          <Tooltip title="Copy data">
-            <Copy onClick={onCopy} />
-          </Tooltip>
-        }>
-        </Card>
+          {
+            payload.length === 0 ? <Empty description="Click generate to create your first payload"/> :
+          <Card title="Users" extra={
+            <Tooltip title="Copy data">
+              <Copy onClick={onCopy} className='cursor-pointer'/>
+            </Tooltip>
+          }>
+            <SyntaxHighlighter language='javascript' style={a11yDark} showLineNumbers>
+            {payload}
+          </SyntaxHighlighter>
+          </Card>
+          }
       </div>
    </div>
   )
