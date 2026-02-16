@@ -15,6 +15,25 @@ function App() {
  
   const [payload, setPayload] = useState("");
 
+  const designations = [
+    "manager",
+    "Software Engineer",
+    "HR",
+    "Full Stack Developer",
+    "front-end developer",
+    "backend developer",
+    "android developer",
+    "ceo",
+    "cto",
+    "product manager",
+    "DevOps Engineer"
+  ]
+
+  const getDesignation = () => {
+    const index = Math.floor(Math.random() * designations.length);
+    return designations[index];
+  }
+
   // generate user data
   const generateUser = () => {
     return {
@@ -39,7 +58,7 @@ function App() {
         id : nanoid(),
         title : faker.commerce.productName(),
         description : faker.commerce.productDescription(),
-        price : Number(faker.commerce.price()),
+        price : Number(faker.commerce.price({ min : 1000, max : 50000 })),
         discount : Number(faker.commerce.price({ min : 0, max : 50 })),
         rating : Number(faker.commerce.price({ min : 1, max : 5 })),
         category : faker.commerce.productAdjective(),
@@ -50,6 +69,50 @@ function App() {
     }
   }
 
+  // generate payments data
+  const generatePayments = () => {
+    return {
+        id : nanoid(),
+        user : {
+            id : nanoid(),
+            fullname : faker.person.fullName(),
+            email : faker.internet.email(),
+            mobile : faker.phone.number({ style: 'international'}),
+        },
+        product : {
+            id : nanoid(),
+            title : faker.commerce.productName(),
+        },
+        amount : Number(faker.commerce.price({ min: 1000, max : 50000 })),
+        orderId : `ORID-${nanoid()}`,
+        transactionId : `TXNID-${nanoid()}`,
+        method : "UPI",
+        tax : Number(faker.commerce.price({ min : 0, max : 50 })),
+        createdAt : faker.date.anytime()
+    }
+  }
+
+  // generate user data
+  const generateEmployees = () => {
+    return {
+        id : nanoid(),
+        fullname : faker.person.fullName(),
+        email : faker.internet.email(),
+        mobile : faker.phone.number({ style: 'international'}),
+        gender : faker.person.gender(),
+        salary : Number(faker.commerce.price({ min : 20000, max : 100000 })),
+        designation : getDesignation(),
+        address : faker.location.streetAddress({ useFullAddress: true }),
+        city : faker.location.city(),
+        state : faker.location.state(),
+        country : faker.location.country(),
+        pincode : faker.location.zipCode(),
+        createdAt : faker.date.anytime()
+      
+    }
+  }
+
+
   const generateData = (values) => {
 
     const tmp = [];
@@ -59,6 +122,15 @@ function App() {
       }
       else if(values.data === "products"){
         tmp.push(generateProducts());
+      }
+      else if(values.data === "payments"){
+        tmp.push(generatePayments());
+      }
+      else if(values.data === "employees"){
+        tmp.push(generateEmployees());
+      }
+      else {
+        message.error("Match not found")
       }
     }
 
@@ -76,10 +148,10 @@ function App() {
       <div className='w-9/12 mx-auto flex flex-col gap-12'>
         <div className='text-center'>
           <h1 className='text-3xl font-bold'>Dummy Data Generator</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ab cumque libero, odit aperiam beatae cum sed ipsum,
-            consectetur nihil hic explicabo sint non fuga placeat animi? Suscipit, aut eligendi.
-          </p>
+          <p className='mt-6'>
+            Generate dummy json data for four categories Users, Products, Payments & Employees for maximum of 100 data. select the options
+            from select tag and generate it and copy it and use in your projects.
+           </p>
         </div>
 
         <Card>
