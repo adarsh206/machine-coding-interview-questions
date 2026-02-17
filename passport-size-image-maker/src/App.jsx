@@ -1,11 +1,16 @@
 
-import { Upload } from 'lucide-react'
+import { TestTube, Upload } from 'lucide-react'
 import './App.css'
 import { useCallback, useState } from 'react'
 import Cropper from 'react-easy-crop';
 
+
+const PHOTO_W = 413
+const PHOTO_H = 531
+
 function App() {
   
+  const [zoom, setZoom] = useState(1)
   const [image, setImage] = useState(null);
   const [crop, setCrop] = useState({x : 0, y : 0});
   const [pixels, setPixels] = useState(null)
@@ -14,9 +19,30 @@ function App() {
     setPixels(pixels)
   }, [])
 
+  const generateImage = () => {
+    try {
+      const url = URL.createObjectURL(image);
+      const img = new Image();
+      img.src = url;
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = PHOTO_W
+        canvas.height = PHOTO_H
+        const ctx = canvas.getContext("2d")
+        ctx.fillStyle = "#fff"
+        ctx.fillRect(0, 0, PHOTO_W, PHOTO_H)
+        ctx.drawImage(img, pixels.x, pixels.y, pixels.width, pixels.height, 0, 0, PHOTO_W, PHOTO_H)
+        const result = canvas.toDataURL("image/png")
+        console.log(result)
+      }
+    } catch (error) {
+      console.log("Error - ", error.message)
+    }
+  }
+
   return (
    <div className='bg-gray-200 min-h-screen p-10'>
-      <div className='relative h-[420px] bg-black rounded-xl overflow-hidden max-w-xl mx-auto'>
+      <div className='relative h-105 bg-black rounded-xl overflow-hidden max-w-xl mx-auto'>
         {
           !image &&
         <div className='flex flex-col items-center justify-center h-full'>
@@ -28,7 +54,19 @@ function App() {
         }
         {
           image &&
-          <Cropper image={URL.createObjectURL(image)} aspect={35 / 45} crop={crop} onCropChange={setCrop} onCropComplete={onCropComplete}/>
+          <Cropper image={URL.createObjectURL(image)} aspect={35 / 45} crop={crop} onCropChange={setCrop}
+          zoom={zoom} onCropComplete={onCropComplete}/>
+        }
+      </div>
+
+      <div className='flex justify-center mt-4'>
+        {
+          image &&
+          <div className='flex flex-col gap-4'>
+            <input type='range' min={1} max={3} step={0.1} onChange={(e) => setZoom(e.target.value)}/>
+            <button onClick={generateImage}
+            className='bg-rose-500 text-white font-medium px-8 py-2 rounded active:scale-80 transition duration-300 hover:scale-105'>Generate</button>
+          </div>
         }
       </div>
    </div>
