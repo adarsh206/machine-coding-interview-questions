@@ -7,6 +7,8 @@ import Cropper from 'react-easy-crop';
 
 const PHOTO_W = 413
 const PHOTO_H = 531
+const COLS = 4
+const ROWS = 2
 
 function App() {
   
@@ -32,8 +34,28 @@ function App() {
         ctx.fillStyle = "#fff"
         ctx.fillRect(0, 0, PHOTO_W, PHOTO_H)
         ctx.drawImage(img, pixels.x, pixels.y, pixels.width, pixels.height, 0, 0, PHOTO_W, PHOTO_H)
-        const result = canvas.toDataURL("image/png")
-        console.log(result)
+        // const result = canvas.toDataURL("image/png")
+        
+        // set single image for 8 times
+        const page = document.createElement("canvas")
+        page.width = PHOTO_W * COLS
+        page.height = PHOTO_H * ROWS
+        const pageCtx = page.getContext("2d")
+        pageCtx.fillStyle = "#fff"
+        pageCtx.fillRect(0, 0, page.width, page.height)
+
+        for(let row = 0; row < ROWS; row++){
+          for(let col = 0; col < COLS; col++){
+            pageCtx.drawImage(canvas, col * PHOTO_W, row * PHOTO_H, PHOTO_W, PHOTO_H)
+            pageCtx.strokeStyle = "#000"
+            pageCtx.strokeRect(col * PHOTO_W, row * PHOTO_H, PHOTO_W, PHOTO_H)
+          }
+        }
+
+        const a = document.createElement("a")
+        a.href = page.toDataURL("image/png")
+        a.download = "passport.png"
+        a.click()
       }
     } catch (error) {
       console.log("Error - ", error.message)
