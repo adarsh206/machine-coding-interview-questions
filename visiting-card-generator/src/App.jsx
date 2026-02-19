@@ -9,11 +9,12 @@ function App() {
 
    const divRef = useRef(null);
    const [inputType, setInputType] = useState(null);
+   const [value, setValue] = useState('');
    const [card, setCard] = useState({
       image : null,
-      title : null,
-      subtitle : null,
-      small : null
+      title : { label : null, left : 20, top : 30 },
+      subtitle : { label : null, left : 20, top : 50 },
+      small : { label : null, left : 20, top : 70 }
    })
 
  const addImage = (e) => {
@@ -29,18 +30,19 @@ function App() {
 
 
 const addText = (type) => {
+   setValue('')
    setInputType(inputType === type ? null : type);
 }
 
 
 const onSubmit = (e) => {
    e.preventDefault();
-   const value = e.target[0].value.trim()
-   console.log(inputType);
-   console.log(value);
    setCard({
       ...card,
-      [inputType] : value
+      [inputType] : {
+         ...card[inputType],
+         label : value
+      }
    })
 }
 
@@ -57,8 +59,21 @@ const download = async () => {
 }
 
 
-const onDragEnd = (e) => {
-
+const onDragEnd = (e, inputType) => {
+   const dragX = e.clientX;
+   const dragY = e.clientY;
+   const div = divRef.current
+   const rec = div.getBoundingClientRect();
+   const leftPosition = Math.max(0, Math.round(dragX - rec.left));
+   const topPosition = Math.max(0, Math.round(dragY - rec.top));
+   setCard({
+      ...card,
+      [inputType] : {
+         ...card[inputType],
+         left : leftPosition,
+         top : topPosition
+      }
+   })
 }
 
   return (
@@ -69,8 +84,10 @@ const onDragEnd = (e) => {
          <form onSubmit={onSubmit} className='flex col-span-4 gap-3'>
                <input 
                   className='border border-gray-300 rounded py-2 px-3 flex-1'
-                  placeholder='Enter content here'
+                  placeholder={`Enter ${inputType === "" ? "content" : inputType} here`}
                   required
+                  onChange={(e) => setValue(e.target.value.trim())}
+                  value={value}
                />
                <button className='px-6 py-2 rounded text-white bg-violet-600'>Add</button>
          </form>
@@ -95,16 +112,16 @@ const onDragEnd = (e) => {
 
      <div ref={divRef}
      style={{
-      border : (card.image || card.title || card.subtitle || card.small) ? undefined : '1px dashed #ccc'
+      border : (card.image || card.title.label || card.subtitle.label || card.small.label) ? undefined : '1px dashed #ccc'
      }}
      className='overflow-hidden relative flex items-center justify-center p-8 col-span-4 rounded-lg h-[250px]'>
         {
-         (card.image || card.title || card.subtitle || card.small) ?
+         (card.image || card.title.label || card.subtitle.label || card.small.label) ?
          <>
             <img src={card.image} className='w-full h-full absolute top-0 left-0 object-cover rounded-lg'/>
-            <h1 onDragEnd={onDragEnd} draggable className='cursor-move absolute top-3 left-5 text-white font-semibold text-2xl'>{card.title}</h1>
-            <h1 onDragEnd={onDragEnd} draggable className='cursor-move absolute top-12 left-12 text-white font-semibold text-lg'>{card.subtitle}</h1>
-            <h1 onDragEnd={onDragEnd}draggable className='cursor-move absolute top-24 left-16 text-white text-base'>{card.small}</h1>
+            <h1 onDragEnd={(e) => onDragEnd(e, "title")} draggable className='cursor-move absolute text-white font-semibold text-3xl' style={{ top : card.title.top, left : card.title.left}}>{card.title.label}</h1>
+            <h1 onDragEnd={(e) => onDragEnd(e, "subtitle")} draggable className='cursor-move absolute text-white font-semibold text-xl' style={{ top : card.subtitle.top, left : card.subtitle.left}}>{card.subtitle.label}</h1>
+            <h1 onDragEnd={(e) => onDragEnd(e, "small")} draggable className='cursor-move absolute text-white text-base' style={{ top : card.small.top, left : card.small.left}}>{card.small.label}</h1>
          </>
          :
          <h1 className='text-lg text-gray-500 font-medium'>Visiting Card</h1>
