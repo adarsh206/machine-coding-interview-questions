@@ -4,17 +4,27 @@ import { Button, Input, Modal, Select, Form } from 'antd'
 import { Plus, Trash2 } from 'lucide-react'
 import 'animate.css'
 import { useState } from 'react'
+import { useBook } from './zustand/useBook'
+import { nanoid } from 'nanoid'
+import moment  from 'moment'
 
 function App() {
  
-  const [open, SetOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [form] = Form.useForm();
+  const { books, setBook} = useBook()
 
   const createBook = (value) => {
-    console.log(value)
+    value.id = nanoid();
+    value.date = new Date();
+    value.status = "unread"
+    setBook(value);
+    handleClose();
   }
 
   const handleClose = () => {
-    
+    setOpen(false);
+    form.resetFields();
   }
 
 
@@ -24,7 +34,7 @@ function App() {
       
       <div className='flex justify-between items-center'>
         <h1 className='text-white/60 text-5xl font-bold text-center'>Book Library</h1>
-        <Button onClick={() => SetOpen(true)} size='large' className='bg-rose-500! shadow-none! active:scale-80! duration-300!' type='primary' icon={<Plus />}>Add a new book</Button>
+        <Button onClick={() => setOpen(true)} size='large' className='bg-rose-500! shadow-none! active:scale-80! duration-300!' type='primary' icon={<Plus />}>Add a new book</Button>
       </div>
       
       <div className='grid grid-cols-3 gap-8 mt-8'>
@@ -47,13 +57,13 @@ function App() {
 
       <div className='grid grid-cols-4 gap-8 mt-8'>
         {
-          Array(20).fill(0).map((item, index) => (
+          books.map((item, index) => (
             <div key={index} className='bg-slate-900 border border-slate-600 p-4 rounded-lg'>
-              <img src='/book1.jpg'  className='w-full h-[170px] object-cover rounded-lg'/>
-              <h1 className='text-white text-lg font-medium mt-2'>The lean startup</h1>
-              <label className='text-white/60'>19 February 2026, 10:00 AM</label>
+              <img src={item.poster || "/book1.jpg"}  className='w-full h-[170px] object-cover rounded-lg'/>
+              <h1 className='text-white text-lg font-medium mt-2'>{item.name}</h1>
+              <label className='text-white/60'>{moment(item.date).format('DD MMM YYYY, hh:mm A')}</label>
               <div className='flex justify-between items-center mt-3'>
-                <Select className='w-[100px]' defaultValue="unread">
+                <Select className='w-25' defaultValue={item.status}>
                   <Select.Option value="unread">Unread</Select.Option>
                   <Select.Option value="reading">Reading</Select.Option>
                   <Select.Option value="completed">Completed</Select.Option>
@@ -66,8 +76,8 @@ function App() {
       </div>
     </div>
 
-    <Modal open={open} footer={null} title="Add a new book">
-        <Form onFinish={createBook}>
+    <Modal open={open} footer={null} title="Add a new book" onCancel={handleClose}>
+        <Form onFinish={createBook} form={form}>
           <Form.Item name="name" rules={[{ required : true }]}>
             <Input placeholder='Enter a book name' size='large'/>
           </Form.Item>
