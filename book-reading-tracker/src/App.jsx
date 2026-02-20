@@ -12,7 +12,7 @@ function App() {
  
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
-  const { books, setBook} = useBook()
+  const { books, setBook, updateStatus, deleteBook} = useBook()
 
   const createBook = (value) => {
     value.id = nanoid();
@@ -30,7 +30,7 @@ function App() {
 
   return (
    <div className='py-16 min-h-screen flex items-center justify-center bg-gradient-to-r from-slate-900 via-slate-600 to-slate-900'>
-    <div className='animate__animated animate__fadeIn w-10/12 mx-auto p-8 bg-slate-800 min-h-[2000px] border border-slate-600 rounded-xl overflow-y-auto'>
+    <div className='animate__animated animate__fadeIn w-10/12 mx-auto p-8 bg-slate-800 min-h-[200px] border border-slate-600 rounded-xl overflow-y-auto'>
       
       <div className='flex justify-between items-center'>
         <h1 className='text-white/60 text-5xl font-bold text-center'>Book Library</h1>
@@ -41,17 +41,29 @@ function App() {
         
         <div className='bg-slate-900 border border-slate-600 p-4 rounded-lg overflow-hidden'>
             <h1 className='text-orange-600 text-4xl font-bold'>Unread</h1>
-            <p className='text-white text-9xl font-bold animate__animated animate__slideInUp'>12</p>
+            <p className='text-white text-9xl font-bold animate__animated animate__slideInUp'>
+              {
+                books.filter(item => item.status === "unread").length
+              }
+            </p>
         </div>
 
         <div className='bg-slate-900 border border-slate-600 p-4 rounded-lg overflow-hidden'>
             <h1 className='text-green-500 text-4xl font-bold'>Reading</h1>
-            <p className='text-white text-9xl font-bold animate__animated animate__slideInUp'>1</p>
+            <p className='text-white text-9xl font-bold animate__animated animate__slideInUp'>
+              {
+                books.filter(item => item.status === "reading").length
+              }
+            </p>
         </div>
 
         <div className='bg-slate-900 border border-slate-600 p-4 rounded-lg overflow-hidden'>
             <h1 className='text-amber-500 text-4xl font-bold'>Completed</h1>
-            <p className='text-white text-9xl font-bold animate__animated animate__slideInUp'>40</p>
+            <p className='text-white text-9xl font-bold animate__animated animate__slideInUp'>
+              {
+                books.filter(item => item.status === "completed").length
+              }
+            </p>
         </div>
       </div>
 
@@ -63,12 +75,12 @@ function App() {
               <h1 className='text-white text-lg font-medium mt-2'>{item.name}</h1>
               <label className='text-white/60'>{moment(item.date).format('DD MMM YYYY, hh:mm A')}</label>
               <div className='flex justify-between items-center mt-3'>
-                <Select className='w-25' defaultValue={item.status}>
+                <Select className='w-25' defaultValue={item.status} onChange={(v) => updateStatus(item.id, v)}>
                   <Select.Option value="unread">Unread</Select.Option>
                   <Select.Option value="reading">Reading</Select.Option>
                   <Select.Option value="completed">Completed</Select.Option>
                 </Select>
-                <Trash2 className="text-rose-500 active:scale-80 duration-300 hover:scale-125" />
+                <Trash2 onClick={() => deleteBook(item.id)} className="text-rose-500 active:scale-80 duration-300 hover:scale-125" />
               </div>
             </div>
           ))
