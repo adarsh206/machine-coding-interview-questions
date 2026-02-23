@@ -10,6 +10,19 @@ export const useAlarm = create(persist(
         })),
         deleteAlarm : (id) => set((state) => ({
             alarms : state.alarms.filter((alarm) => alarm.id !== id)
+        })),
+         updateAlarm : (id, payload) => set((state) => ({
+            alarms : state.alarms.map((alarm) => {
+                if(alarm.id === id){
+                    return {
+                        ...alarm,
+                        ...payload
+                    }
+                }
+                else{
+                    return alarm;
+                }
+            })
         }))
     }),
     { name : "alarm"}

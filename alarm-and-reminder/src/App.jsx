@@ -3,7 +3,7 @@ import './App.css'
 import 'animate.css'
 import { Plus, Trash2 } from 'lucide-react'
 import { Button, DatePicker, Form, Input, message, Modal, Switch } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAlarm } from './zustand/useAlarm';
 import { nanoid } from 'nanoid';
 import moment from 'moment';
@@ -13,7 +13,7 @@ function App() {
 
   const [form] = Form.useForm();
   const [open, setOpen] = useState(false);
-  const { alarms, setAlarm, deleteAlarm} = useAlarm()
+  const { alarms, setAlarm, deleteAlarm, updateAlarm} = useAlarm()
 
   const createAlarm = (values) => {
     values.datetime = values.datetime.toDate();
@@ -31,6 +31,23 @@ function App() {
     form.resetFields();
   }
 
+  const onOffAlarm = (value, id) => {
+    const payload = {
+      status : value ? "on" : "off"
+    }
+    updateAlarm(id, payload)
+    
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log("Hello")
+    }, 1000);
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
 
   return (
   <div className='bg-gray-200 min-h-screen'>
@@ -51,7 +68,7 @@ function App() {
               <div key={index} className='bg-white rounded-lg p-4 shadow'>
                 <div className='flex items-center justify-between'>
                   <h1 className='text-2xl font-bold'>{moment(item.datetime).format('hh:mm:ss A')}</h1>
-                  <Switch defaultChecked={item.status === "on"} checkedChildren="ON" unCheckedChildren="FF" />
+                  <Switch defaultChecked={item.status === "on"} checkedChildren="ON" unCheckedChildren="OFF" onChange={(v) =>onOffAlarm(v, item.id)}/>
                 </div>
                 <div>
                   <p className='text-gray-600 text-[13px]'>{moment(item.datetime).format('MMM DD, YYYY')}</p>
