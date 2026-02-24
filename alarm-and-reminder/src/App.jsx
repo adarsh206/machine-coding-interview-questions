@@ -1,27 +1,33 @@
 
 import './App.css'
 import 'animate.css'
-import { Plus, Trash2 } from 'lucide-react'
+import { AlarmCheck, Plus, Trash2 } from 'lucide-react'
 import { Button, DatePicker, Form, Input, message, Modal, Switch } from 'antd';
 import { useEffect, useState } from 'react';
 import { useAlarm } from './zustand/useAlarm';
 import { nanoid } from 'nanoid';
 import moment from 'moment';
 
+const audio = new Audio("/sounds/alarm.mp3");
+audio.loop = true;
+
 
 function App() {
 
   const [form] = Form.useForm();
   const [open, setOpen] = useState(false);
-  const { alarms, setAlarm, deleteAlarm, updateAlarm} = useAlarm()
+  const { alarms, setAlarm, deleteAlarm, updateAlarm} = useAlarm();
+  const [updateCount, setUpdateCount] = useState(0);
 
   const createAlarm = (values) => {
     values.datetime = values.datetime.toDate();
     values.id = nanoid();
     values.status = "on"
+    values.triggered = false
     setAlarm(values);
     message.success("Alarm set successfully!");
-    handleClose()
+    handleClose();
+    setUpdateCount(updateCount + 1);
     console.log(values);
   }
   
@@ -40,14 +46,27 @@ function App() {
   }
 
   useEffect(() => {
+
+    if(alarms.length === 0){
+      return
+    }
     const interval = setInterval(() => {
-      console.log("Hello")
+      const now = moment();
+     alarms.forEach((alarm) => {
+        if(alarm.status === "on" && !alarm.triggered && moment(alarm.datetime).isSameOrBefore(now)){
+          audio.play();
+          updateAlarm(alarm.id, {
+            triggered : true,
+            status : "off"
+          })
+        }
+     });
     }, 1000);
 
     return () => {
       clearInterval(interval)
     }
-  }, [])
+  }, [updateCount])
 
   return (
   <div className='bg-gray-200 min-h-screen'>
@@ -98,6 +117,14 @@ function App() {
           <Button type='primary' htmlType='submit' size='large'>Submit</Button>
         </Form.Item>
       </Form>
+    </Modal>
+
+    <Modal open footer={null}>
+        <div className='flex flex-col items-center'>
+         <AlarmCheck className='w-48 h-48 animate__animated animate__pulse animate__infinite'/>
+         <h1 className='text-4xl font-bold'>Medicine Reminder</h1>
+         <Button type='primary' danger size='large' className='px-8! mt-5!'>Close</Button>
+        </div>
     </Modal>
   </div>
   )
