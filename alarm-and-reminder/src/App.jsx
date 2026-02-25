@@ -14,6 +14,8 @@ audio.loop = true;
 
 function App() {
 
+  const [alarmModel, setAlarmModel] = useState(false);
+  const [activeAlarm, setActiveAlarm] = useState(null);
   const [form] = Form.useForm();
   const [open, setOpen] = useState(false);
   const { alarms, setAlarm, deleteAlarm, updateAlarm} = useAlarm();
@@ -31,6 +33,12 @@ function App() {
     console.log(values);
   }
   
+  const stopAlarm = () => {
+    audio.pause();
+    setActiveAlarm(null);
+    setAlarmModel(false)
+
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -54,11 +62,14 @@ function App() {
       const now = moment();
      alarms.forEach((alarm) => {
         if(alarm.status === "on" && !alarm.triggered && moment(alarm.datetime).isSameOrBefore(now)){
+          setAlarmModel(true);
+          setActiveAlarm(alarm);
           audio.play();
           updateAlarm(alarm.id, {
             triggered : true,
             status : "off"
           })
+          clearInterval(interval)
         }
      });
     }, 1000);
@@ -119,11 +130,11 @@ function App() {
       </Form>
     </Modal>
 
-    <Modal open footer={null}>
+    <Modal open={alarmModel} footer={null} onCancel={stopAlarm}>
         <div className='flex flex-col items-center'>
          <AlarmCheck className='w-48 h-48 animate__animated animate__pulse animate__infinite'/>
-         <h1 className='text-4xl font-bold'>Medicine Reminder</h1>
-         <Button type='primary' danger size='large' className='px-8! mt-5!'>Close</Button>
+         <h1 className='text-4xl font-bold'>{activeAlarm?.title}</h1>
+         <Button type='primary' danger size='large' className='px-8! mt-5!' onClick={stopAlarm}>Close</Button>
         </div>
     </Modal>
   </div>
