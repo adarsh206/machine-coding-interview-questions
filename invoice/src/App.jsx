@@ -2,7 +2,7 @@
 
 import './App.css'
 import { Plus, Printer } from 'lucide-react';
-import { Button, DatePicker, Drawer, Form, Input, Tooltip } from 'antd'
+import { Button, DatePicker, Drawer, Form, Input, Select, Tooltip } from 'antd'
 import { useState } from 'react';
 
 function App() {
@@ -59,6 +59,61 @@ function App() {
       name : "companyGst",
       required : true
     },
+        {
+      label : "Customer name",
+      name : "customerName",
+      required : true
+    },
+    {
+      label : "Customer email",
+      name : "customerEmail",
+      required : true
+    },
+    {
+      label : "Customer address",
+      name : "customerAddress",
+      required : true
+    },
+    {
+      label : "Customer state",
+      name : "customerState",
+      required : true
+    },
+    {
+      label : "Customer country",
+      name : "customerCountry",
+      required : true
+    },
+    {
+      label : "Customer pincode",
+      name : "customerPincode",
+      required : true
+    },
+    {
+      label : "Choose payment method",
+      name : "paymentMethod",
+      required : true,
+      options : [
+        {
+          label : "Bank",
+          value : "bank"
+        },
+        {
+          label : "UPI",
+          value : "upi"
+        },
+      ]
+    },
+    {
+      label : "Transaction id",
+      name : "transactionid",
+      required : true
+    },
+    {
+      label : "Due date",
+      name : "duedate",
+      required : true
+    },
   ]
 
   const generateInvoice = (values) => {
@@ -89,15 +144,26 @@ function App() {
         <Form layout='vertical' onFinish={generateInvoice} className='grid grid-cols-2 gap-x-6'>
           {
             formSchema.map((item, index) => {
-              if(item.name === "date"){
+              if(item.name === "date" || item.name === "duedate"){
                 return (
                   <Form.Item
                   key={index} 
                   label={<h1 className='font-medium text-base'>{item.label}</h1>} name={item.name} rules={[{ required : item.required}]}>
                     <DatePicker size="large" className='w-full!'/>
                   </Form.Item>
-        )
+               )
               }
+
+              if(item.name === "paymentMethod"){
+                return (
+                  <Form.Item
+                  key={index} 
+                  label={<h1 className='font-medium text-base'>{item.label}</h1>} name={item.name} rules={[{ required : item.required}]}>
+                    <Select size='large' className='w-full!' options={item.options} placeholder="Choose payment method" />
+                  </Form.Item>
+               )
+              }
+              
               return (
               <Form.Item
                key={index} 

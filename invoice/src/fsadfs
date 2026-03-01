@@ -1,0 +1,35 @@
+    {
+      label : "Customer name",
+      name : "customerName",
+      required : true
+    },
+    {
+      label : "Customer email",
+      name : "customerEmail",
+      required : true
+    },
+    {
+      label : "Customer address",
+      name : "customerAddress",
+      required : true
+    },
+    {
+      label : "Customer state",
+      name : "customerState",
+      required : true
+    },
+    {
+      label : "Customer country",
+      name : "customerCountry",
+      required : true
+    },
+    {
+      label : "Customer pincode",
+      name : "customerPincode",
+      required : true
+    },
+    {
+      label : "Customer gst",
+      name : "customerGst",
+      required : true
+    },
