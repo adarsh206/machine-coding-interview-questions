@@ -3,8 +3,9 @@
 import './App.css'
 import { Plus, Printer } from 'lucide-react';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, DatePicker, Drawer, Form, Input, Select, Space, Tooltip } from 'antd'
+import { Button, DatePicker, Divider, Drawer, Form, Input, InputNumber, Select, Space, Tooltip } from 'antd'
 import { useState } from 'react';
+import  moment  from 'moment'
 
 function App() {
   
@@ -112,12 +113,23 @@ function App() {
     },
     {
       label : "Due date",
-      name : "duedate",
+      name : "dueDate",
+      required : true
+    },
+    {
+      label : "Gst rate",
+      name : "gstRate",
       required : true
     },
   ]
 
   const generateInvoice = (values) => {
+    values.date = moment(values.date).format('DD MMM YYYY')
+    values.dueDate = moment(values.dueDate).format('DD MMM YYYY')
+    values.products = values.products.map((product) => ({
+      ...product,
+      amount : (product.qty * product.rate)
+    }))
     console.log(values)
   }
 
@@ -145,7 +157,17 @@ function App() {
         <Form layout='vertical' onFinish={generateInvoice} className='grid grid-cols-2 gap-x-6'>
           {
             formSchema.map((item, index) => {
-              if(item.name === "date" || item.name === "duedate"){
+              if(item.name === "gstRate"){
+                 return (
+                  <Form.Item
+                  key={index} 
+                  label={<h1 className='font-medium text-base'>{item.label}</h1>} name={item.name} rules={[{ required : item.required}]}>
+                    <InputNumber size="large" className='w-full!'/>
+                  </Form.Item>
+               )
+              }
+
+              if(item.name === "date" || item.name === "dueDate"){
                 return (
                   <Form.Item
                   key={index} 
@@ -175,31 +197,43 @@ function App() {
         )        
           }
 
-          <Form.List name="users">
+          <Divider className='col-span-2'>
+            Product Details
+          </Divider>
+          <Form.List name="products" className='col-span-2'>
           {(fields, { add, remove }) => (
             <>
               {fields.map(({ key, name, ...restField }) => (
-                <Space key={key} style={{ display: 'flex', marginBottom: 8 }} align="baseline">
+                <Space key={key} style={{ display: 'flex', marginBottom: 8 }} align="baseline" className='col-span-2'>
                   <Form.Item
                     {...restField}
                     name={[name, 'item']}
                     rules={[{ required: true, message: 'Item is missing' }]}
                   >
-                    <Input placeholder="First Name" />
+                    <Input placeholder="item" />
                   </Form.Item>
+
                   <Form.Item
                     {...restField}
-                    name={[name, 'last']}
-                    rules={[{ required: true, message: 'Missing last name' }]}
+                    name={[name, 'qty']}
+                    rules={[{ required: true, message: 'Quantity is missing' }]}
                   >
-                    <Input placeholder="Last Name" />
+                    <InputNumber placeholder="Quantity" size='large' className='w-full!'/>
+                  </Form.Item>
+
+                  <Form.Item
+                    {...restField}
+                    name={[name, 'rate']}
+                    rules={[{ required: true, message: 'Rate is missing' }]}
+                  >
+                    <InputNumber placeholder="Rate" className='!w-full' size='large' />
                   </Form.Item>
                   <MinusCircleOutlined onClick={() => remove(name)} />
                 </Space>
               ))}
               <Form.Item>
-                <Button type="dashed" onClick={() => add()} block icon={<Plus />}>
-                  Add field
+                <Button type="dashed" onClick={() => add()} block icon={<Plus />} size='large'>
+                  Add Products
                 </Button>
               </Form.Item>
             </>
