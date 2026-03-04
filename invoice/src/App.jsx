@@ -10,6 +10,7 @@ import  moment  from 'moment'
 function App() {
   
   const [open, setOpen] = useState(false);
+  const [invoice, setInvoice] = useState(null);
 
   const handleClose = () => {
     setOpen(false);
@@ -130,13 +131,100 @@ function App() {
       ...product,
       amount : (product.qty * product.rate)
     }))
+    values.subtotal = values.products.reduce((sum, item) => sum + item.amount, 0)
+    values.tax = (values.subtotal * values.gstRate) / 100
+    values.total = values.subtotal + values.tax
+    setInvoice(values);
     console.log(values)
   }
 
   return (
-   <div className='bg-gray-200 min-h-screen'>
-    <div>
+   <div className='bg-gray-200 min-h-screen print:min-h-0 py-6 print:bg-white print:py-0'>
+    <div className='mx-auto bg-white w-[210mm] min-h-[297mm] p-[15mm] shadow-lg print:shadow-2xl'>
+      
+      <div className='flex justify-between items-start border-b p-6'>
+        <div>
+          <h1 className='text-2xl font-bold text-gray-800'>INVOICE</h1>
+          <p className='text-sm text-gray-500 mt-1'>#INV-0001</p>
+          <p className='text-sm text-gray-800'>Date: 01 Jan 2026</p>
+        </div>
 
+        <div className='text-right'>
+          <h2 className='text-lg font-semibold text-gray-800'>ABC Solutions Pvt Ltd</h2>
+          <p className='text-sm text-gray-500'>www.example.com</p>       
+          <p className='text-sm text-gray-500'>123 Business street</p>       
+          <p className='text-sm text-gray-500'>New Delhi, India - 110001</p>       
+          <p className='text-sm text-gray-500'>GST : 00ABCDE0000Z0Z0</p>       
+        </div>
+      </div>
+
+        <div className='grid grid-cols-2 gap-8 mt-8'>
+          <div>
+            <h3 className='text-sm font-semibold text-gray-600 mb-2'>BILL TO</h3>
+            <p className='text-sm font-medium text-gray-800'>John Doe</p>
+            <p className='text-sm text-gray-500'>XYZ Enterprises</p>
+            <p className='text-sm text-gray-500'>456 Client Road</p>
+            <p className='text-sm text-gray-500'>Mumbai, India - 400001</p>
+            <p className='text-sm text-gray-500'>Email : client@example.com</p>
+          </div>
+
+          <div className='text-right'>
+            <h3 className='text-sm font-semibold text-gray-600 mb-2'>PAYMENT DETAILS</h3>
+            <p className='text-sm text-gray-500'>Payment Method: Bank Transfer</p>
+            <p className='text-sm text-gray-500'>Reference ID: PAY123456</p>
+            <p className='text-sm text-gray-500'>Due Date: 10 Jan 2026</p>
+          </div>
+        </div>
+
+        <div className='mt-10'>
+          <table className='w-full border-collapse'>
+            <thead>
+              <tr className='bg-gray-100 text-left text-sm text-gray-600'>
+                <th className='p-3 border'>Description</th>
+                <th className='p-3 border text-right'>Qty</th>
+                <th className='p-3 border text-right'>Rate</th>
+                <th className='p-3 border text-right'>Amount</th>
+              </tr>
+            </thead>
+            <tbody className='text-sm text-gray-700'>
+              <tr>
+                <td className='p-3 border'>Software Development Service</td>
+                <td className='p-3 border text-right'>1</td>
+                <td className='p-3 border'>₹10,000</td>
+                <td className='p-3 border'>₹10,000</td>
+              </tr>
+              <tr>
+                <td className='p-3 border'>GST (18%)</td>
+                <td className='p-3 border text-right'>-</td>
+                <td className='p-3 border'>-</td>
+                <td className='p-3 border'>₹18,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className='flex justify-end mt-6'>
+          <div className='w-1/3'>
+            <div className='flex justify-between text-sm mb-2'>
+              <span className='text-gray-600'>Subtotal</span>
+              <span className='text-gray-800'>₹10,000</span>
+            </div>
+            <div className='flex justify-between text-sm mb-2'>
+              <span className='text-gray-600'>Tax</span>
+              <span className='text-gray-800'>₹18,00</span>
+            </div>
+            <div className='flex justify-between text-base font-semibold border-t pt-2'>
+              <span>Total</span>
+              <span>₹11,800</span>
+            </div>
+        </div>
+      </div>
+        <div className='mt-12 border-t pt-6 text-sm text-gray-500'>
+          <p>Thank you for your business.</p>
+          <p className='mt-1'>
+            This is a sample invoice generated for demonstration purposes only.
+          </p>
+        </div>  
     </div>
 
     <div className='fixed -translate-y-1/2 top-1/2 left-0 bg-white rounded-r-lg p-4 flex flex-col gap-4 shadow-lg'>
