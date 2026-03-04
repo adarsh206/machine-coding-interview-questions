@@ -11,9 +11,11 @@ function App() {
   
   const [open, setOpen] = useState(false);
   const [invoice, setInvoice] = useState(null);
+  const [form] = Form.useForm();
 
   const handleClose = () => {
     setOpen(false);
+    form.resetFields()
   }
 
   const formSchema = [
@@ -30,6 +32,11 @@ function App() {
     {
       label : "Company name",
       name : "companyName",
+      required : true
+    },
+    {
+      label : "Company website",
+      name : "companyWebsite",
       required : true
     },
     {
@@ -62,9 +69,14 @@ function App() {
       name : "companyGst",
       required : true
     },
-        {
+    {
       label : "Customer name",
       name : "customerName",
+      required : true
+    },
+    {
+      label : "Customer company name",
+      name : "customerCompanyName",
       required : true
     },
     {
@@ -136,24 +148,25 @@ function App() {
     values.total = values.subtotal + values.tax
     setInvoice(values);
     console.log(values)
+    handleClose()
   }
 
   return (
    <div className='bg-gray-200 min-h-screen print:min-h-0 py-6 print:bg-white print:py-0'>
-    <div className='mx-auto bg-white w-[210mm] min-h-[297mm] p-[15mm] shadow-lg print:shadow-2xl'>
+    <div className='mx-auto bg-white w-[210mm] min-h-[297mm] p-[15mm] shadow-lg print:shadow-none print:m-0'>
       
-      <div className='flex justify-between items-start border-b p-6'>
+      <div className='flex justify-between items-start border-b pb-6'>
         <div>
           <h1 className='text-2xl font-bold text-gray-800'>INVOICE</h1>
-          <p className='text-sm text-gray-500 mt-1'>#INV-0001</p>
-          <p className='text-sm text-gray-800'>Date: 01 Jan 2026</p>
+          <p className='text-sm text-gray-500 mt-1'>#INV-{invoice?.invoiceNo || '0001'}</p>
+          <p className='text-sm text-gray-800'>Date: {invoice?.date || '01 March 2026'}</p>
         </div>
 
         <div className='text-right'>
-          <h2 className='text-lg font-semibold text-gray-800'>ABC Solutions Pvt Ltd</h2>
-          <p className='text-sm text-gray-500'>www.example.com</p>       
-          <p className='text-sm text-gray-500'>123 Business street</p>       
-          <p className='text-sm text-gray-500'>New Delhi, India - 110001</p>       
+          <h2 className='text-lg font-semibold text-gray-800'>{invoice?.companyName || 'ABC Solutions Pvt Ltd'}</h2>
+          <p className='text-sm text-gray-500'>{invoice?.companyWebsite || 'www.example.com'}</p>       
+          <p className='text-sm text-gray-500'>{invoice?.companyAddress || '123 Business street'}</p>       
+          <p className='text-sm text-gray-500'>{invoice?.companyState || 'New Delhi'}, {invoice?.companyCountry || 'India'} - {invoice?.companyPincode || '110001'}</p>       
           <p className='text-sm text-gray-500'>GST : 00ABCDE0000Z0Z0</p>       
         </div>
       </div>
@@ -161,18 +174,18 @@ function App() {
         <div className='grid grid-cols-2 gap-8 mt-8'>
           <div>
             <h3 className='text-sm font-semibold text-gray-600 mb-2'>BILL TO</h3>
-            <p className='text-sm font-medium text-gray-800'>John Doe</p>
-            <p className='text-sm text-gray-500'>XYZ Enterprises</p>
-            <p className='text-sm text-gray-500'>456 Client Road</p>
-            <p className='text-sm text-gray-500'>Mumbai, India - 400001</p>
-            <p className='text-sm text-gray-500'>Email : client@example.com</p>
+            <p className='text-sm font-medium text-gray-800'>{invoice?.customerName || 'John Doe'}</p>
+            <p className='text-sm text-gray-500'>{invoice?.customerCompanyName || 'XYZ Enterprises'}</p>
+            <p className='text-sm text-gray-500'>{invoice?.customerAddress || '456 Client Road'}</p>
+            <p className='text-sm text-gray-500'>{invoice?.customerState || 'Mumbai'}, {invoice?.customerCountry || 'India'} - {invoice?.customerPincode || '400001'}</p>
+            <p className='text-sm text-gray-500'>Email : {invoice?.customerEmail || 'client@example.com'}</p>
           </div>
 
           <div className='text-right'>
             <h3 className='text-sm font-semibold text-gray-600 mb-2'>PAYMENT DETAILS</h3>
-            <p className='text-sm text-gray-500'>Payment Method: Bank Transfer</p>
-            <p className='text-sm text-gray-500'>Reference ID: PAY123456</p>
-            <p className='text-sm text-gray-500'>Due Date: 10 Jan 2026</p>
+            <p className='text-sm text-gray-500'>Payment Method: {invoice?.paymentMethod || 'Bank'} Transfer</p>
+            <p className='text-sm text-gray-500'>Reference ID: {invoice?.transactionId || 'PAY123456'}</p>
+            <p className='text-sm text-gray-500'>Due Date: {invoice?.dueDate || '10 Jan 2026'}</p>
           </div>
         </div>
 
@@ -187,17 +200,22 @@ function App() {
               </tr>
             </thead>
             <tbody className='text-sm text-gray-700'>
+              {
+                invoice?.products.map((product, index) => (
+                  <tr key={index}>
+                  <td className='p-3 border'>{product.item}</td>
+                  <td className='p-3 border text-right'>{product.qty}</td>
+                  <td className='p-3 border text-right'>₹{product.rate.toLocaleString()}</td>
+                  <td className='p-3 border text-right'>₹{product.amount.toLocaleString()}</td>
+                </tr>
+                ))
+              }
+              
               <tr>
-                <td className='p-3 border'>Software Development Service</td>
-                <td className='p-3 border text-right'>1</td>
-                <td className='p-3 border'>₹10,000</td>
-                <td className='p-3 border'>₹10,000</td>
-              </tr>
-              <tr>
-                <td className='p-3 border'>GST (18%)</td>
-                <td className='p-3 border text-right'>-</td>
-                <td className='p-3 border'>-</td>
-                <td className='p-3 border'>₹18,00</td>
+                <td className='p-3 border'>GST ({invoice?.gstRate || 0}%)</td>
+                <td className='p-3 border text-right'>—</td>
+                <td className='p-3 border text-right'>—</td>
+                <td className='p-3 border text-right'>₹{invoice?.tax || 0}</td>
               </tr>
             </tbody>
           </table>
@@ -207,15 +225,15 @@ function App() {
           <div className='w-1/3'>
             <div className='flex justify-between text-sm mb-2'>
               <span className='text-gray-600'>Subtotal</span>
-              <span className='text-gray-800'>₹10,000</span>
+              <span className='text-gray-800'>₹{invoice?.subtotal.toLocaleString() || 0}</span>
             </div>
             <div className='flex justify-between text-sm mb-2'>
               <span className='text-gray-600'>Tax</span>
-              <span className='text-gray-800'>₹18,00</span>
+              <span className='text-gray-800'>₹{invoice?.tax.toLocaleString() || 0}</span>
             </div>
             <div className='flex justify-between text-base font-semibold border-t pt-2'>
               <span>Total</span>
-              <span>₹11,800</span>
+              <span>₹{invoice?.total || 0}</span>
             </div>
         </div>
       </div>
@@ -227,22 +245,22 @@ function App() {
         </div>  
     </div>
 
-    <div className='fixed -translate-y-1/2 top-1/2 left-0 bg-white rounded-r-lg p-4 flex flex-col gap-4 shadow-lg'>
-        <Tooltip title="Create a new invoice">
+    <div className='print:hidden fixed -translate-y-1/2 top-1/2 left-0 bg-white rounded-r-lg p-4 flex flex-col gap-4 shadow-lg'>
+        <Tooltip title="Create a new invoice" className='print:hidden!'>
           <button onClick={() => setOpen(true)} className='bg-blue-500 text-white p-2 rounded hover:scale-105 transition duration-300 active:scale-80'>
             <Plus />
           </button>
         </Tooltip>
 
-        <Tooltip title="Print your invoice">
-          <button className='bg-blue-500 text-white p-2 rounded hover:scale-105 transition duration-300 active:scale-80'>
+  
+          <button onClick={() => window.print()} className='bg-blue-500 text-white p-2 rounded hover:scale-105 transition duration-300 active:scale-80'>
             <Printer />
           </button>
-        </Tooltip>
+   
     </div>
     <Drawer open={open} onClose={handleClose} size={720} title="Create a new invoice">
       <div>
-        <Form layout='vertical' onFinish={generateInvoice} className='grid grid-cols-2 gap-x-6'>
+        <Form form={form} layout='vertical' onFinish={generateInvoice} className='grid grid-cols-2 gap-x-6'>
           {
             formSchema.map((item, index) => {
               if(item.name === "gstRate"){
