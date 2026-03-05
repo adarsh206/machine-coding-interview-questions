@@ -1,4 +1,4 @@
-import { Button, Form, Input, Select } from 'antd'
+import { Button, Form, Input, message, Select } from 'antd'
 import React, { useState } from 'react'
 
 const Converter = () => {
@@ -7,8 +7,28 @@ const Converter = () => {
 
 
     const convertImage = (values) => {
-        values.image = file
-        console.log(values)
+        try {
+            const url = URL.createObjectURL(file)
+            const image = new Image();
+            image.src = url
+            image.onload = () => {
+                const originalWidth = image.width
+                const originalHeight = image.height
+                const canvas = document.createElement("canvas");
+                canvas.width = originalWidth
+                canvas.height = originalHeight
+                const ctx = canvas.getContext("2d")
+                ctx.drawImage(image, 0, 0)
+                const finalImage = canvas.toDataURL(values.format)
+                const a = document.createElement("a")
+                a.href = finalImage
+                a.download = `sample.${values.format.split("/").pop()}`
+                a.click()
+            }
+        } catch (error) {
+            message.error(error.message)
+        }
+        
     }
 
     const options = [
