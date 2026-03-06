@@ -1,7 +1,7 @@
 
 import './App.css'
 import "animate.css"
-import { Button, Form, Input, Modal } from "antd"
+import { Button, Form, Input, message, Modal } from "antd"
 import { Plus, Lock, Unlock } from 'lucide-react'
 import { useState } from 'react'
 import { useImage } from './zustand/useImage'
@@ -13,10 +13,14 @@ function App() {
   
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
+  const [passwordForm] = Form.useForm();
   const [file, setFile] = useState(null);
   const { images, setImage} = useImage();
   const [passwordModal, setPasswordModal] = useState(false);
   const [currentImage, setCurrentImage] = useState(null)
+  const [isUnlocked, setIsUnlocked] = useState(false);
+
+
   const closeModal = () => {
     setOpen(false);
     form.resetFields()
@@ -36,12 +40,31 @@ function App() {
   }
 
   const unlockImage = (id) => {
+    setIsUnlocked(false);
     setCurrentImage(id);
     setPasswordModal(true)
   }
 
   const tryToUnlock = (values) => {
-    console.log(values)
+    const password = values.password;
+    const check = images.some((image) => image.id === currentImage && image.password === password)
+    
+    if(!check){
+      message.error("Incorrect Password");
+      return
+    }
+    setIsUnlocked(check);
+    closePasswordModal();
+  }
+
+  const lockImage = () => {
+    setCurrentImage(null);
+    setIsUnlocked(false)
+  }
+
+  const closePasswordModal = () => {
+    setPasswordModal(false);
+    passwordForm.resetFields();
   }
 
   return (
@@ -56,16 +79,25 @@ function App() {
           {
             images.map((item, index) => (
               <div key={index} className='bg-white shadow-lg rounded-2xl p-4 border border-gray-200 animate__animated animate__fadeIn'>
-                <div className='w-full h-[160px] bg-gray-100 rounded-2zl flex items-center justify-center'>
-                  <Lock className='w-16 h-16'/>
-                </div>
-                <img src={item.image} className='w-full h-[160px] object-cover rounded-2xl'/>
+                {
+                  (currentImage === item.id && isUnlocked) ?
+                  <img src={item.image} className='w-full h-[160px] object-cover rounded-2xl'/>
+                  :
+                  <div className='w-full h-[160px] bg-gray-100 rounded-2zl flex items-center justify-center'>
+                    <Lock className='w-16 h-16'/>
+                  </div>
+
+                }
                 
                 <div className='mt-3'>
                   <h1 className='text-lg font-medium'>{item.name}</h1>
                   <p className='text-gray-600 text-sm mb-3'>{moment(item.date).format('DD MMM YYYY')}</p>
-                  <Button icon={<Lock className='w-4 h-4'/>} variant='solid' color='purple'>Lock</Button>
-                  <Button icon={<Unlock className='w-4 h-4'/>} variant='solid' color='magenta' onClick={() => unlockImage(item.id)}>Unlock</Button>
+                  {
+                    (currentImage === item.id && isUnlocked) ?
+                    <Button icon={<Lock className='w-4 h-4'/>} variant='solid' color='purple' onClick={() => lockImage(item.id)}>Lock</Button>
+                    :
+                    <Button icon={<Unlock className='w-4 h-4'/>} variant='solid' color='magenta' onClick={() => unlockImage(item.id)}>Unlock</Button>
+                  }
                 </div>
               </div>      
             ))
@@ -95,8 +127,8 @@ function App() {
       </Modal>
 
       {/* //Unlock Password Section */}
-       <Modal open={passwordModal} footer={null} title="Unlock Image" onCancel={() => setPasswordModal(false)}>
-          <Form onFinish={tryToUnlock}>
+       <Modal open={passwordModal} footer={null} title="Unlock Image" onCancel={closePasswordModal}>
+          <Form onFinish={tryToUnlock} form={passwordForm}>
 
             <Form.Item name="password" rules={[{ required: true }]}>
               <Input.Password placeholder="Password" size='large' />
