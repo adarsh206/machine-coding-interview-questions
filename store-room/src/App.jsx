@@ -1,6 +1,7 @@
 
 import './App.css'
-import { Card, Input, Tag } from 'antd'
+import { Button, Card, Form, Input, InputNumber, Modal, Select, Tag } from 'antd'
+import { Plus } from 'lucide-react'
 
 function App() {
   
@@ -10,8 +11,12 @@ function App() {
       <div className='w-10/12 bg-white rounded-4xl shadow-lg p-8 mx-auto space-y-12'>
         <div className='flex justify-between items-center'>
           <h1 className='text-4xl font-bold text-blue-600'>📦 Store Room</h1>
-          <Input size='large' placeholder='Search this store'
-          className='!w-lg'/>
+          <div className='space-x-4!'>
+            <Input size='large' placeholder='Search this store'
+              className='!w-lg'/>
+              <Button size='large' variant='solid' color='blue' icon={<Plus className='w-4 h-4'/>}>Add Item</Button>
+          </div>
+          
         </div>
 
         <div className='grid grid-cols-4 gap-8'>
@@ -28,11 +33,37 @@ function App() {
                   <Tag>Electronic</Tag>
                   <Tag>Electronic</Tag>
                 </div>
+
+                <div className='mt-4 space-x-3'>
+                  <Button variant='solid' color='green'>Edit</Button>
+                  <Button variant='solid' color='pink'>Delete</Button>
+                </div>
               </Card>
             ))
           }
         </div>        
       </div>
+
+      <Modal open footer={null} title="Add Item">
+          <Form>
+            <Form.Item name="title" rules={[{required: true}]}>
+              <Input size='large' placeholder='Title'/>
+            </Form.Item>
+
+            <Form.Item name="qnt" rules={[{required: true}]}>
+              <InputNumber size='large' placeholder='Quantity' className='w-full!'/>
+            </Form.Item>
+
+            <Form.Item name="unitOfMeasure" rules={[{required: true}]}>
+              <Select size='large' placeholder="Choose value" options={[
+                {label: "PC", value: "pc"},
+                {label: "KG", value: "kg"},
+                {label: "LTR", value: "ltr"},
+                {label: "GM", value: "gm"},
+              ]}/>
+            </Form.Item>
+          </Form>
+      </Modal>
     </div>
   )
 }
