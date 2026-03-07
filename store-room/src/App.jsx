@@ -2,9 +2,21 @@
 import './App.css'
 import { Button, Card, Form, Input, InputNumber, Modal, Select, Tag } from 'antd'
 import { Plus } from 'lucide-react'
+import { useState } from 'react'
 
 function App() {
   
+  const [open, setOpen] = useState(false);
+  const [form] = Form.useForm()
+
+  const createItem = (values) => {
+    console.log(values)
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+    form.resetFields()
+  }
 
   return (
     <div className='bg-gray-200 min-h-screen py-12'>
@@ -14,7 +26,7 @@ function App() {
           <div className='space-x-4!'>
             <Input size='large' placeholder='Search this store'
               className='!w-lg'/>
-              <Button size='large' variant='solid' color='blue' icon={<Plus className='w-4 h-4'/>}>Add Item</Button>
+              <Button onClick={() => setOpen(true)} size='large' variant='solid' color='blue' icon={<Plus className='w-4 h-4'/>}>Add Item</Button>
           </div>
           
         </div>
@@ -44,13 +56,13 @@ function App() {
         </div>        
       </div>
 
-      <Modal open footer={null} title="Add Item">
-          <Form>
+      <Modal open={open} onCancel={handleClose} footer={null} title="Add Item">
+          <Form onFinish={createItem} form={form}>
             <Form.Item name="title" rules={[{required: true}]}>
               <Input size='large' placeholder='Title'/>
             </Form.Item>
 
-            <Form.Item name="qnt" rules={[{required: true}]}>
+            <Form.Item name="qnt" rules={[{required: true, type: 'number'}]}>
               <InputNumber size='large' placeholder='Quantity' className='w-full!'/>
             </Form.Item>
 
@@ -61,6 +73,18 @@ function App() {
                 {label: "LTR", value: "ltr"},
                 {label: "GM", value: "gm"},
               ]}/>
+            </Form.Item>
+
+            <Form.Item name="keywords" rules={[{required: true}]}>
+              <Select size='large' placeholder="Enter keywords" mode='tags'/>
+            </Form.Item>
+
+             <Form.Item name="image" rules={[{type : 'url'}]}>
+              <Input size='large' placeholder='image url'/>
+            </Form.Item>
+
+            <Form.Item>
+              <Button htmlType='submit' type='primary' size='large'>Submit</Button>
             </Form.Item>
           </Form>
       </Modal>
