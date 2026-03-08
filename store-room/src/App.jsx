@@ -10,7 +10,9 @@ function App() {
   
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
-  const { stores, setStore, deleteStore, updateStore } = useStoreRoom()
+  const { stores, setStore, deleteStore, updateStore } = useStoreRoom();
+  const [editId, setEditId] = useState(null);
+  
 
   const createItem = (values) => {
     values.id = nanoid();
@@ -21,13 +23,20 @@ function App() {
 
   const handleClose = () => {
     setOpen(false);
-    form.resetFields()
+    form.resetFields();
+    setEditId(null)
   }
 
   const editStore = (item) => {
+    setEditId(item.id);
     setOpen(true);
-    form.setFieldValue(item)
+    form.setFieldsValue(item)
   }
+
+  const saveItem = (values) => {
+    updateStore(editId, values);
+    handleClose()
+  } 
 
   return (
     <div className='bg-gray-200 min-h-screen py-12'>
@@ -44,9 +53,9 @@ function App() {
 
         <div className='grid grid-cols-4 gap-8'>
           {
-            stores.map((item, index) => (
-              <Card key={index} hoverable className='shadow-lg' 
-              cover={<img className='w-40! !h-40 object-cover! mx-auto'
+            stores.map((item) => (
+              <Card key={item.id} hoverable className='shadow-lg' 
+              cover={<img className='w-40! !h-40 object-cover! mx-auto mt-4'
               src={item?.image || '/store.png'} />}>
                 <Card.Meta className='capitalize' title={item.title} description={`${item.qnt} ${item.unitOfMeasure}`} />
                 
@@ -70,7 +79,7 @@ function App() {
       </div>
 
       <Modal open={open} onCancel={handleClose} footer={null} title="Add Item">
-          <Form onFinish={createItem} form={form}>
+          <Form onFinish={editId ? saveItem : createItem} form={form}>
             <Form.Item name="title" rules={[{required: true}]}>
               <Input size='large' placeholder='Title'/>
             </Form.Item>
@@ -97,7 +106,12 @@ function App() {
             </Form.Item>
 
             <Form.Item>
-              <Button htmlType='submit' type='primary' size='large'>Submit</Button>
+              {
+                editId ? 
+                <Button htmlType='submit' type='primary' danger size='large'>Save</Button>
+                :
+                <Button htmlType='submit' type='primary' size='large'>Submit</Button>
+              }
             </Form.Item>
           </Form>
       </Modal>
