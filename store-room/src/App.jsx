@@ -12,6 +12,7 @@ function App() {
   const [form] = Form.useForm();
   const { stores, setStore, deleteStore, updateStore } = useStoreRoom();
   const [editId, setEditId] = useState(null);
+  const [search, setSearch] = useState("");
   
 
   const createItem = (values) => {
@@ -38,13 +39,21 @@ function App() {
     handleClose()
   } 
 
+  const filtered = stores.filter((item) => 
+    item.title.toLowerCase().includes(search)
+    || 
+    item.keywords.some((keyword) => 
+    keyword.toLowerCase().includes(search)
+  )
+)
+
   return (
     <div className='bg-gray-200 min-h-screen py-12'>
       <div className='w-10/12 bg-white rounded-4xl shadow-lg p-8 mx-auto space-y-12'>
         <div className='flex justify-between items-center'>
           <h1 className='text-4xl font-bold text-blue-600'>📦 Store Room</h1>
           <div className='space-x-4!'>
-            <Input size='large' placeholder='Search this store'
+            <Input size='large' placeholder='Search this store' onChange={(e) => setSearch(e.target.value.trim().toLowerCase())}
               className='!w-lg'/>
               <Button onClick={() => setOpen(true)} size='large' variant='solid' color='blue' icon={<Plus className='w-4 h-4'/>}>Add Item</Button>
           </div>
@@ -53,7 +62,7 @@ function App() {
 
         <div className='grid grid-cols-4 gap-8'>
           {
-            stores.map((item) => (
+            filtered.map((item) => (
               <Card key={item.id} hoverable className='shadow-lg' 
               cover={<img className='w-40! !h-40 object-cover! mx-auto mt-4'
               src={item?.image || '/store.png'} />}>
