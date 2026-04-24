@@ -1,8 +1,9 @@
 
 
 .circle-comp{
-    height: 100px;
-    width: 100px;
+    height: 200px;
+    width: 200px;
     background-color: red;
     border-radius: 50%;
+    position: absolute;
 }
