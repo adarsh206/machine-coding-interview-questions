@@ -3,8 +3,7 @@ import "./style.css";
 
 const OverlappingCircle  = () => {
 
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
+  const [circles, setCircles] = useState([]);
 
 
   useEffect(() => {
@@ -19,14 +18,22 @@ const OverlappingCircle  = () => {
     const x = event.clientX;
     const y = event.clientY;
 
-    setX(x);
-    setY(y);
+    const newCircles = {x, y};
+
+    const oldCircles = [...circles];
+    oldCircles.push(newCircles);
+
+    setCircles(oldCircles);
   }
 
 
   return (
     <div className='circle'>
-       {!!x && !!y && <Circle x={x} y={y} />}   
+       {
+        circles.map((coord, index) => {
+          return <Circle key={index} x={coord.x} y={coord.y} />
+        })
+       }  
     </div>
   )
 }
