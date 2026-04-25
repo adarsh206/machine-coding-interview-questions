@@ -15,15 +15,20 @@ const OverlappingCircle  = () => {
   }, [])
 
   function handleDocumentClick(event) {
+    
+
     const x = event.clientX;
     const y = event.clientY;
 
     const newCircles = {x, y};
 
-    const oldCircles = [...circles];
-    oldCircles.push(newCircles);
+    setCircles((prevCircles) => {
+      
+      const oldCircles = [...prevCircles];
+      oldCircles.push(newCircles);
 
-    setCircles(oldCircles);
+      return oldCircles;
+    })
   }
 
 
