@@ -1,6 +1,6 @@
 
 import './App.css'
-import { Bookmark, BriefcaseBusiness, Cpu, Edit, EyeOff, Globe, IndianRupee, MapPin, Notebook, NotebookText, Save, Star, UserRound } from 'lucide-react';
+import { Bookmark, BriefcaseBusiness, Cpu, Edit, Edit2, EyeOff, Globe, IndianRupee, MapPin, Notebook, NotebookText, Save, Star, UserRound } from 'lucide-react';
 
 function App() {
   
@@ -281,13 +281,71 @@ function App() {
           
           </div>
         </div>
-        
-
+      
         
 
         {/** right side */}
-        <div className='w-[30%] max-h-150 sm:block border hidden p-2 border-gray-200 rounded-xl'>
-          <h1>Add preferences to get matching jobs</h1>
+        <div className='w-full md:w-[30%] sm:h-150 sm:block border overflow-auto scrollbar-none hidden p-2 border-gray-200 rounded-xl'>
+          <h1 className='font-bold'>Add preferences to get matching jobs</h1>
+          <div className='mb-2'>
+            <div className='flex gap-2 items-center'>
+              <p>Preferred job role</p>
+              <Edit2 size={14} color='blue'/>
+            </div>
+            <div className='gap-1 flex flex-col pb-2'>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>Software Development Engineer</div>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>FullStack Software Developer</div>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>Software Engineer</div>
+            </div>    
+          </div>
+
+          <div className='mb-2'>
+            <div className='flex gap-2 items-center'>
+              <p>Preferred work location</p>
+              <Edit2 size={14} color='blue'/>
+            </div>
+            <div className='gap-1 flex flex-wrap pb-2'>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>Remote</div>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>Noida</div>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>New Delhi</div>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>Mohali</div>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>Delhi/NCR</div>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>Hyderabad</div>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>Gurgaon/Gurugram</div>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>Chennai</div>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>Bangalore/Bengaluru</div>
+            </div>    
+          </div>
+
+          <div className='mb-2'>
+            <div className='flex gap-2 items-center'>
+              <p>Preferred Salary</p>
+              <Edit2 size={14} color='blue'/>
+            </div>
+            <div className='gap-1 flex flex-wrap pb-2'>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm flex items-center'><IndianRupee size={14}/>21,00,000</div>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm flex items-center'><IndianRupee size={14}/>15,00,000</div>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm flex items-center'><IndianRupee size={14}/>25,00,000</div>             
+            </div>    
+          </div>
+
+          <div className='mb-2'>
+            <div className='flex gap-2 items-center'>
+              <p>Preferred Tech Stack</p>
+              <Edit2 size={14} color='blue'/>
+            </div>
+            <div className='gap-1 flex flex-wrap'>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>ReactJs</div>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>NodeJs</div>
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>ExpressJs</div>         
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>MongoDB</div>         
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>AWS</div>         
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>MERN</div>      
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>CSS</div>      
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>Git/GitHub</div>      
+                <div className='bg-gray-300 rounded-3xl p-2 text-sm'>JavaScript</div>      
+            </div>    
+          </div>
         </div>
       </div>
     </div>
