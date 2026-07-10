@@ -1,6 +1,6 @@
 
 import './App.css'
-import { Briefcase, IndianRupee, MapPin, Pin, Star } from 'lucide-react'
+import { Briefcase, CircleCheck, CircleX, IndianRupee, MapPin, Pin, Star } from 'lucide-react'
 
 function App() {
   
@@ -90,6 +90,42 @@ function App() {
                 <input type='checkbox' className='w-4' />
                 <p className='text-sm text-gray-700'>Follow Aziro as you apply to stay updated</p>
             </div>
+          </div>
+
+          <div className='bg-white mx-auto shadow-2xl rounded-2xl mt-5 p-6'>
+              <div className='bg-gray-100 p-5 my-5 rounded-2xl'>
+                  <h1 className='font-semibold'>Job Highlights</h1>
+                  <div className='my-3 px-5'>
+                    <li className='text-gray-700'>3+ years hands-on Node.js and AWS experience with expertise in ECS, Lambda, Step Functions, RDS, DynamoDB</li>
+                    <li className='text-gray-700'>Design and develop scalable O2Ps platform, manage AWS-based DevOps, ensure quality and reliability, support production, mentor global teams</li>
+                  </div>
+
+                  <div className='mt-5'>
+                    <h1 className='font-semibold'>Job match score</h1>
+                    <div className='flex items-center gap-2 py-2'>
+                      <div className='flex items-center gap-1 justify-center'>
+                        <CircleX size={14} className='mt-0.5'/>
+                        <p className='text-gray-700 font-medium'>Early Applicant</p>
+                      </div>
+                      <div className='flex items-center gap-1 justify-center'>
+                        <CircleCheck size={18} className='mt-0.5 text-white' fill='green'/>
+                        <p className='text-gray-700 font-medium'>Keyskills</p>
+                      </div>
+                      <div className='flex items-center gap-1 justify-center'>
+                        <CircleCheck size={18} className='mt-0.5 text-white' fill='green'/>
+                        <p className='text-gray-700 font-medium'>Location</p>
+                      </div>
+                      <div className='flex items-center gap-1 justify-center'>
+                        <CircleX size={14} className='mt-0.5'/>
+                        <p className='text-gray-700 font-medium'>Work experience</p>
+                      </div>
+                    </div>
+              </div>
+              </div>
+
+              <h1 className='font-bold mx-2'>Job Description</h1>
+
+              
           </div>
         </div>
 
