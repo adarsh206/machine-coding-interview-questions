@@ -123,8 +123,45 @@ function App() {
               </div>
               </div>
 
-              <h1 className='font-bold mx-2'>Job Description</h1>
+              <h1 className='font-bold mx-2 text-xl'>Job Description</h1>
+              <div className='mx-2 mt-5'>
+                <h1 className='font-bold'>Role Overview</h1>
+                <ul className='mx-5 list-disc ml-7 mt-4'>
+                  <li className='text-gray-500'>
+                    <div className='flex gap-1 items-start'>
+                      <span className='text-black whitespace-nowrap font-semibold'>Position:</span>
+                      <p className='text-gray-800'>NodeJs Developer III(Contingent)</p>
+                    </div>
+                  </li>
+                  <li className='mb-2 text-gray-500'>
+                    <div className='flex gap-1 items-start'>
+                      <span className='text-black whitespace-nowrap font-semibold'>Experience:</span>
+                      <p className='text-gray-800'>5- 8 years(higher experience acceptable if handson)</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
 
+              <div className='mx-2 mt-10'>
+                <h1 className='font-bold'>Mandatory Skill Requirements (Non- Negotiable)</h1>
+                <h1 className='font-bold'>Backend/Programming</h1>
+                <ul className='mx-5 list-disc ml-7 mt-4'>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Strong <span className='font-bold text-black'>Node.js</span> with solid <span className='font-bold text-black'>JavaScript/TypeScript </span>fundamentals.</p>            
+                  </li>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Minimum <span className='font-bold text-black'>3+ years of recent, handson Node.js experience</span>.</p>
+                  </li>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Candidate transitioning from <span className='font-bold text-black'>Java / J2EE / Spring Boot to Node.js</span>are acceptable, provided recent Node.js exposure is strong.</p>
+                  </li>
+                  <li className='mb-2 text-gray-500'>
+                    <p className='text-gray-800'>This is a <span className='font-bold text-black'>purely handson coding role</span>.</p>               
+                  </li>
+                </ul>
+              </div>
+
+              
               
           </div>
         </div>
