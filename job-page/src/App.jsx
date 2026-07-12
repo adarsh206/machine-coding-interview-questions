@@ -161,8 +161,83 @@ function App() {
                 </ul>
               </div>
 
-              
-              
+              <div className='mx-2 mt-10'>
+                <h1 className='font-bold'>AWS (Critical)</h1>
+                <ul className='mx-5 list-disc ml-7 mt-4'>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'><span className='font-bold text-black'>Handson AWS experience is mandatory</span>(not just deployment exposure).</p>            
+                  </li>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Candidate must be able to:</p>
+                  </li>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Debug application issues directly in AWS.</p>
+                  </li>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Work with <span className='font-bold text-black'>logs, AWS workflows, and Step Functions</span>.</p>               
+                  </li>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Key services used:</p>               
+                  </li>
+                   <li className='text-gray-500'>
+                    <p className='text-gray-800'><span className='font-bold text-black'>ECS, Lambda, Step Functions, RDS, DynamoDB</span>.</p>               
+                  </li>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'><span className='font-bold text-black'>CloudWatch </span>knowledge is expected.</p>               
+                  </li>
+                  <li className='mb-2 text-gray-500'>
+                    <p className='text-gray-800'><span className='font-bold text-black'>AWS experience: </span>Ideally 3+ years(strong candidates may be evaluated based on depth)</p>               
+                  </li>
+                </ul>
+              </div>
+
+              <div className='mx-2 mt-10'>
+                <h1 className='font-bold'>Databases</h1>
+                <ul className='mx-5 list-disc ml-7 mt-4'>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Working experience with both:</p>            
+                  </li>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'><span className='font-bold text-black'>SQL </span>(RDS)</p>
+                  </li>
+                  <li className='mb-2 text-gray-500'>
+                    <p className='text-gray-800'><span className='font-bold text-black'>NoSQL </span>(DynamoDB)</p>
+                  </li>        
+                </ul>
+              </div>
+
+              <div className='mx-2 mt-10'>
+                <h1 className='font-bold'>Frontend Expectations</h1>
+                <ul className='mx-5 list-disc ml-7 mt-4'>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'><span className='font-bold text-black'>React.js preferred but not mandatory</span></p>            
+                  </li>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Strong backend candidates <span className='font-bold text-black'>open to learning/handling React (20% work)</span>are acceptable</p>
+                  </li>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'><span className='font-bold text-black'>Angular experience </span>is also acceptable as frontend exposure</p>
+                  </li>
+                  <li className='mb-2 text-gray-500'>
+                    <p className='text-gray-800'>Candidates must be <span className='font-bold text-black'>open to fullstack work; </span>profiles refusing frontend tasks should be avoided</p>
+                  </li>         
+                </ul>
+              </div>
+
+              <div className='mx-2 mt-10'>
+                <h1 className='font-bold'>DevOps / CICD</h1>
+                <ul className='mx-5 list-disc ml-7 mt-4'>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Exposure to<span className='font-bold text-black'> CI/CD pipelines</span></p>            
+                  </li>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Experience with <span className='font-bold text-black'>Jenkins </span>and AWS based deployment preferred</p>
+                  </li>
+                  <li className='mb-2 text-gray-500'>
+                    <p className='text-gray-800'>Terraform knowledge is a plus, not mandatory</p>
+                  </li>         
+                </ul>
+              </div> 
           </div>
         </div>
 
