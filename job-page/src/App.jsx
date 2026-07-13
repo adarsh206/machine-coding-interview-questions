@@ -238,13 +238,49 @@ function App() {
                   </li>         
                 </ul>
               </div> 
+
+              <div className='mx-2 mt-10'>
+                <h1 className='font-bold'>System Design</h1>
+                <ul className='mx-5 list-disc ml-7 mt-4'>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>As a <span className='font-bold text-black'>Developer III (Senior) </span>role, candidates should have:</p>            
+                  </li>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Basic <span className='font-bold text-black'>system design </span>and <span className='font-bold text-black'>distributed systems </span>understanding</p>
+                  </li>
+                  <li className='mb-2 text-gray-500'>
+                    <p className='text-gray-800'>Considered a baseline expectation</p>
+                  </li>         
+                </ul>
+              </div>
+
+              <div className='mx-2 mt-10'>
+                <h1 className='font-bold'>Location & Work Model (Strict)</h1>
+                <ul className='mx-5 list-disc ml-7 mt-4'>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'><span className='font-bold text-black'>Location: </span>Bangalore only</p>            
+                  </li>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'><span className='font-bold text-black'>Remote candidates are NOT acceptable </span></p>
+                  </li>       
+                </ul>
+              </div>
+
+              <div className='mx-2 mt-10'>
+                <h1 className='font-bold'>Hiring Notes & Submission Instructions </h1>
+                <ul className='mx-5 list-disc ml-7 mt-4'>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'><span className='font-bold text-black'>Immediate joiners / short notice candidates are strongly preferred </span></p>
+                  </li>       
+                </ul>
+              </div> 
           </div>
         </div>
 
 
         {/** Right side */}
-        <div className='sm:w-[30%] md:block hidden mx-auto mt-5 border border-gray-200 rounded-2xl'>
-          <h1>Right Side</h1>
+        <div className='sm:w-[30%] md:block hidden mx-auto mt-4'>
+                                                                                                                                                                                                            
         </div>
       </div>
       
