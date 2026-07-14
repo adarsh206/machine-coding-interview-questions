@@ -273,6 +273,39 @@ function App() {
                     <p className='text-gray-800'><span className='font-bold text-black'>Immediate joiners / short notice candidates are strongly preferred </span></p>
                   </li>       
                 </ul>
+              </div>
+
+              <div className='mx-2 mt-10'>
+                <h1 className='font-bold'>Responsibilities: </h1>
+                <ul className='mx-5 list-disc ml-7 mt-4'>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Design and Develop O2Ps platform (consisting of a web application and APIs).</p>
+                  </li>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Contribute to the DevOps functions of scalable, secure & cost-effective customer facing web and software applications in the AWS cloud (Lambda, ECS containers, API Gateway, RDS).</p>
+                  </li>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Proactively work to evaluate and adopt technology solutions to build the O2P platform.</p>
+                  </li> 
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Use strong Quality and DevOps practices to build maintainable and extensible solutions. The solutions that you help build are pragmatic and resilient.</p>
+                  </li> 
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>And consider the upstream and downstream process and system impacts. You are strongly invested in Unit Testing.</p>
+                  </li> 
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Work to meet Autodesks Built with Forge pillars that encompass Engineering Excellence, Build and Deploy, Operational Excellence, Recoverability & Reliability areas.</p>
+                  </li> 
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Partner with business stakeholders to understand the use cases that fuel the business and translate them to functional and non-functional requirements.</p>
+                  </li>  
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Support the products you build in Production.</p>
+                  </li>  
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Mentor and work with team members spread in APAC, EMEA and the US.</p>
+                  </li>      
+                </ul>
               </div> 
           </div>
         </div>
