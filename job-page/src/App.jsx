@@ -306,6 +306,36 @@ function App() {
                     <p className='text-gray-800'>Mentor and work with team members spread in APAC, EMEA and the US.</p>
                   </li>      
                 </ul>
+              </div>
+
+              <div className='mx-2 mt-10'>
+                <h1 className='font-bold'>Minimum Qualifications: </h1>
+                <ul className='mx-5 list-disc ml-7 mt-4'>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Consistent with the role, have strong architectural skills and ability to design scalable, available, resilient and cost-effective applications in the cloud.</p>
+                  </li>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>(preferably AWS). The candidate should have the ability to pick out the right tech stack and tools for the problem to be solved.</p>
+                  </li>
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Strong technical expertise in building Restful microservices using Node.js with an appropriate data store suited to the problem at hand (should be comfortable with both Relational and NoSQL databases).</p>
+                  </li> 
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Technical expertise in building API and UI..</p>
+                  </li> 
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Good knowledge of API security and data encryption.</p>
+                  </li> 
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>Strong DevOps and Quality mindset with design and implementation experience in the areas of CI/CD, Observability and Test automation.</p>
+                  </li> 
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>We want a team that solves the problems of today but also can evolve. To that end, we want a team member with a curious & growth mindset.</p>
+                  </li>  
+                  <li className='text-gray-500'>
+                    <p className='text-gray-800'>collaborative work style that seeks to understand & drive solutions and effective communication.</p>
+                  </li>     
+                </ul>
               </div> 
           </div>
         </div>
