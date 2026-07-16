@@ -337,6 +337,19 @@ function App() {
                   </li>     
                 </ul>
               </div> 
+
+              <div className='mx-2 mt-10'>
+                <p className='text-gray-800'><span className='font-bold'>Role: </span>Back End Developer</p>
+                <p className='text-gray-800'><span className='font-bold'>Industry Type: </span>Software Product</p>
+                <p className='text-gray-800'><span className='font-bold'>Department: </span>Engineering - Software & QA</p>
+                <p className='text-gray-800'><span className='font-bold'>Employment Type: </span>Full Time, Permanent</p>
+                <p className='text-gray-800'><span className='font-bold'>Role Category: </span>Software Development</p>
+              </div>
+
+              <div className='mx-2 mt-5'>
+                <h1 className='font-bold'>Education:</h1>
+                <p className='text-gray-800'><span className='font-bold'>UG: </span>B.Tech / B.E. in Computer Science and Engineering (CSE), Information Technology</p>
+              </div>
           </div>
         </div>
 
