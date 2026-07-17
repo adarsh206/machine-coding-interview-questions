@@ -350,6 +350,23 @@ function App() {
                 <h1 className='font-bold'>Education:</h1>
                 <p className='text-gray-800'><span className='font-bold'>UG: </span>B.Tech / B.E. in Computer Science and Engineering (CSE), Information Technology</p>
               </div>
+
+              <div className='mx-2 mt-5'>
+                <h1 className='font-bold'>Key Skills:</h1>
+                <p className='text-gray-800 flex'>Skills highlighted with ‘<Star size={13} className='mt-1.5'/>‘ are preferred keyskills</p>
+                <div className='flex flex-wrap items-center gap-2 mt-3'>
+                  <div className='flex items-center gap-1 border border-gray-300 px-2 py-1 rounded-2xl text-gray-800'><Star size={13} /> Javascript</div>
+                  <div className='flex items-center gap-1 border border-gray-300 px-2 py-1 rounded-2xl text-gray-800'><Star size={13} /> Amazon Cloudwatch</div>
+                  <div className='flex items-center gap-1 border border-gray-300 px-2 py-1 rounded-2xl text-gray-800'><Star size={13} /> Node.js</div>
+                  <div className='flex items-center gap-1 border border-gray-300 px-2 py-1 rounded-2xl text-gray-800'><Star size={13} /> AWS</div>
+                  <div className='flex items-center gap-1 border border-gray-300 px-2 py-1 rounded-2xl text-gray-800'><Star size={13} /> Backend Development</div>
+                  <div className='flex items-center gap-1 border border-gray-300 px-2 py-1 rounded-2xl text-gray-800'><Star size={13} /> Express.js</div>
+                </div>
+              </div>
+
+              <div className='w-full border border-gray-300 mt-4'></div>
+
+              
           </div>
         </div>
 
