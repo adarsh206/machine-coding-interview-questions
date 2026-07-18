@@ -1,6 +1,6 @@
 
 import './App.css'
-import { Briefcase, CircleCheck, CircleX, IndianRupee, MapPin, Pin, Star } from 'lucide-react'
+import { Briefcase, ChevronRight, CircleCheck, CircleX, IndianRupee, MapPin, Pin, Star } from 'lucide-react'
 
 function App() {
   
@@ -367,6 +367,31 @@ function App() {
               <div className='w-full border border-gray-300 mt-4'></div>
 
               
+          </div>
+
+          <div className='bg-white mx-auto shadow-2xl rounded-2xl mt-5 p-6'>
+            <h1 className='font-bold'>About the company</h1>
+            <div className='flex items-center justify-between mt-4'>
+              <div className='flex items-center gap-5'>
+                <div className='border rounded-2xl p-1 border-gray-300'>
+                  <img alt="Company Logo" loading="lazy" className='w-18 h-18' src="https://img.naukimg.com/logo_images/groups/v1/4610259.gif"></img>
+                </div>
+                <div >
+                  <div className='gap-1 flex'>
+                      <h1 className='font-semibold'>Aziro</h1><ChevronRight className='text-blue-600'/>
+                  </div>
+                  <div className='flex items-center gap-1 my-3'>
+                    <div className='border border-gray-300 px-2 py-1 text-gray-800 rounded-2xl text-sm'>Software Product</div>
+                    <div className='border border-gray-300 px-2 py-1 text-gray-800 rounded-2xl text-sm'>Foreign MNC</div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <button className='bg-blue-500 font-bold py-2 px-5 text-white rounded-3xl'>+ Follow</button>
+                <p className='text-sm text-gray-700 my-2'>222.2k followers</p>
+              </div>
+            </div>
           </div>
         </div>
 
