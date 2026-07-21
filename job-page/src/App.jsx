@@ -392,6 +392,14 @@ function App() {
                 <p className='text-sm text-gray-700 my-2'>222.2k followers</p>
               </div>
             </div>
+
+            <div className='mt-5'>
+              <h1 className='font-bold'>Overview</h1>
+              <p className='my-2 text-gray-800'>Aziro is an AI-native product engineering company helping global enterprises and ISVs build intelligent, scalable digital platforms.</p>
+              <p className='my-2 text-gray-800'>With deep expertise across AI, cloud, platform engineering, and infrastructure, we enable organizations to modernize technology, accelerate product innovation, and deliver real-world impact at scale.</p>
+              <p className='my-2 text-gray-800'>As a right-sized global engineering partner, Aziro combines agility with strong technical depth. Our teams across 10+ countries, including our recent expansion into Japan, collaborate to solve complex challenges and build future-ready systems.</p>
+              <p className='my-2 text-gray-800'>Driven by passionate engineers and a culture of ownership and innovation, we empower our people to push boundaries, grow continuously, and create meaningful impact.Aziro has been recognized as one of the Forbes India–DGEMS Select 200 Companies for 2024.</p>
+            </div>
           </div>
         </div>
 
