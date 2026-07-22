@@ -400,6 +400,15 @@ function App() {
               <p className='my-2 text-gray-800'>As a right-sized global engineering partner, Aziro combines agility with strong technical depth. Our teams across 10+ countries, including our recent expansion into Japan, collaborate to solve complex challenges and build future-ready systems.</p>
               <p className='my-2 text-gray-800'>Driven by passionate engineers and a culture of ownership and innovation, we empower our people to push boundaries, grow continuously, and create meaningful impact.Aziro has been recognized as one of the Forbes India–DGEMS Select 200 Companies for 2024.</p>
             </div>
+
+            <div className='mt-5'>
+              <h1 className='font-bold'>Life at Aziro</h1>
+              <div className='flex flex-wrap gap-5 items-center justify-start mt-4'>
+                <img className='w-[47%] h-50 rounded-2xl' src="https://static.ambitionbox.com/alpha/company/photos/company_446664/premium/display/d3580b5c1f4f04fa0bdfc9ca0186ef271c603af3.jpg" alt="Image"></img>
+                <img className='w-[47%] h-50 rounded-2xl' src="https://static.ambitionbox.com/alpha/company/photos/company_446664/premium/display/52bee7df4fd640699a4a499a7ef0aff25455c18c.jpg" alt="Image"></img>
+              </div>
+              <p className='text-gray-800 mt-4 text-medium tracking-tight'>Aziro have proven to excel at everything they do- be it presenting at world tech events, contributing to client critical projects, or sports competitions. We always have so much to do, so much to achieve and so, so much to celebrate! You will never experience a dull day at Aziro! </p>
+            </div>
           </div>
         </div>
 
