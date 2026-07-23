@@ -395,10 +395,10 @@ function App() {
 
             <div className='mt-5'>
               <h1 className='font-bold'>Overview</h1>
-              <p className='my-2 text-gray-800'>Aziro is an AI-native product engineering company helping global enterprises and ISVs build intelligent, scalable digital platforms.</p>
-              <p className='my-2 text-gray-800'>With deep expertise across AI, cloud, platform engineering, and infrastructure, we enable organizations to modernize technology, accelerate product innovation, and deliver real-world impact at scale.</p>
-              <p className='my-2 text-gray-800'>As a right-sized global engineering partner, Aziro combines agility with strong technical depth. Our teams across 10+ countries, including our recent expansion into Japan, collaborate to solve complex challenges and build future-ready systems.</p>
-              <p className='my-2 text-gray-800'>Driven by passionate engineers and a culture of ownership and innovation, we empower our people to push boundaries, grow continuously, and create meaningful impact.Aziro has been recognized as one of the Forbes India–DGEMS Select 200 Companies for 2024.</p>
+              <p className='my-3 text-gray-800 tracking-tight'>Aziro is an AI-native product engineering company helping global enterprises and ISVs build intelligent, scalable digital platforms.</p>
+              <p className='my-3 text-gray-800 tracking-tight'>With deep expertise across AI, cloud, platform engineering, and infrastructure, we enable organizations to modernize technology, accelerate product innovation, and deliver real-world impact at scale.</p>
+              <p className='my-3 text-gray-800 tracking-tight'>As a right-sized global engineering partner, Aziro combines agility with strong technical depth. Our teams across 10+ countries, including our recent expansion into Japan, collaborate to solve complex challenges and build future-ready systems.</p>
+              <p className='my-3 text-gray-800 tracking-tight'>Driven by passionate engineers and a culture of ownership and innovation, we empower our people to push boundaries, grow continuously, and create meaningful impact.Aziro has been recognized as one of the Forbes India–DGEMS Select 200 Companies for 2024.</p>
             </div>
 
             <div className='mt-5'>
@@ -409,6 +409,16 @@ function App() {
               </div>
               <p className='text-gray-800 mt-4 text-medium tracking-tight'>Aziro have proven to excel at everything they do- be it presenting at world tech events, contributing to client critical projects, or sports competitions. We always have so much to do, so much to achieve and so, so much to celebrate! You will never experience a dull day at Aziro! </p>
             </div>
+
+            <div className='mt-5'>
+              <h1 className='font-bold'>Company Info</h1>
+              <a href="https://www.aziro.com/en">Link: <span className='text-blue-700 font-semibold'>Aziro website</span></a>
+            </div>
+          </div>
+
+          <div className='bg-white mx-auto shadow-2xl rounded-2xl m-5 p-6'>
+            <h1 className='font-bold'>Beware of imposters!</h1>
+            <p className='text-medium tracking-tight text-gray-800'>Naukri.com does not promise a job or an interview in exchange of money. Fraudsters may ask you to pay in the pretext of registration fee, Refundable Fee.</p>
           </div>
         </div>
 
