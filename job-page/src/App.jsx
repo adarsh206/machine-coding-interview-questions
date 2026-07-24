@@ -424,8 +424,75 @@ function App() {
 
 
         {/** Right side */}
-        <div className='sm:w-[30%] md:block hidden mx-auto mt-4'>
-                                                                                                                                                                                                            
+        <div className='sm:w-[30%] mx-auto mt-4'>
+            <div className='bg-white mx-auto shadow-2xl rounded-2xl m-1 p-4'>
+              <h1 className='font-bold'>Aziro role</h1>
+              <h1 className='font-bold'>you might be interested in</h1>
+              <div>
+                <div className='flex items-center justify-between'>
+                  <div className='mt-3'>
+                    <h1 className='font-bold'>Software Engineer</h1>
+                    <div className='flex gap-2 items-center mt-2'>
+                      <Briefcase size={16} className='text-gray-400'/>
+                      <p className='text-gray-600'>2 - 6 years</p>
+                    </div>
+                    <div className='flex items-center gap-1'>
+                      <MapPin size={16} className='text-gray-400 items-center mt-1'/>
+                      <p className='text-gray-600'>Bengaluru</p>
+                    </div>
+                    <p className='text-xs text-gray-800 my-2'>Posted 1 day ago</p>
+                  </div>
+                  <div className='-mt-8'>
+                    <img alt="Company Logo" loading="lazy" className="w-12 h-12 border border-gray-400 rounded-2xl" src="https://img.naukimg.com/logo_images/groups/v1/4610259.gif">
+                    </img>
+                  </div>
+                </div>
+                <div className='w-full h-0 border my-3 border-gray-200'></div>
+              </div>
+
+              <div>
+                <div className='flex items-center justify-between'>
+                  <div className='mt-3'>
+                    <h1 className='font-bold'>Software Engineer</h1>
+                    <div className='flex gap-2 items-center mt-2'>
+                      <Briefcase size={16} className='text-gray-400'/>
+                      <p className='text-gray-600'>3 - 8 years</p>
+                    </div>
+                    <div className='flex items-center gap-1'>
+                      <MapPin size={16} className='text-gray-400 items-center mt-1'/>
+                      <p className='text-gray-600'>Bengaluru</p>
+                    </div>
+                    <p className='text-xs text-gray-800 my-2'>Posted 30+ day ago</p>
+                  </div>
+                  <div className='-mt-8'>
+                    <img alt="Company Logo" loading="lazy" className="w-12 h-12 border border-gray-400 rounded-2xl" src="https://img.naukimg.com/logo_images/groups/v1/4610259.gif">
+                    </img>
+                  </div>
+                </div>
+                <div className='w-full h-0 border my-3 border-gray-200'></div>
+              </div>
+
+              <div>
+                <div className='flex items-center justify-between'>
+                  <div className='mt-3'>
+                    <h1 className='font-bold'>Senior Software Engineer</h1>
+                    <div className='flex gap-2 items-center mt-2'>
+                      <Briefcase size={16} className='text-gray-400'/>
+                      <p className='text-gray-600'>6 - 9 years</p>
+                    </div>
+                    <div className='flex items-center gap-1'>
+                      <MapPin size={16} className='text-gray-400 items-center mt-1'/>
+                      <p className='text-gray-600'>Bengaluru</p>
+                    </div>
+                    <p className='text-xs text-gray-800 my-2'>Posted 30+ day ago</p>
+                  </div>
+                  <div className='-mt-8'>
+                    <img alt="Company Logo" loading="lazy" className="w-12 h-12 border border-gray-400 rounded-2xl" src="https://img.naukimg.com/logo_images/groups/v1/4610259.gif">
+                    </img>
+                  </div>
+                </div>
+              </div>
+            </div>                                                                                                                                                                                            
         </div>
       </div>
       
