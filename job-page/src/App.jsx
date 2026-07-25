@@ -492,7 +492,124 @@ function App() {
                   </div>
                 </div>
               </div>
-            </div>                                                                                                                                                                                            
+            </div>  
+
+            <div className='p-4 mt-4 border border-gray-200 rounded-2xl bg-white'>
+              <div className='flex items-center gap-4'>
+                  <img alt="award img" loading="lazy" className='' sizes={14} src="https://static.naukimg.com/s/9/121/_next/static/media/award-new-ot.c4f7b2a0.svg"></img>
+                  <h1 className='font-bold'>Awards & Recognitions</h1>
+              </div>
+
+              <div>
+                <div className='mt-4 flex items-center gap-2'>
+                  <div className='relative flex flex-col items-center justify-center'>
+                    <div className='p-1 border-5 border-gray-400 rounded-full w-2 h-2'>
+                      <div className='absolute mt-2.25 h-12 border border-gray-200 '></div> 
+                    </div>
+                  </div>
+                  <div className='mt-4'>
+                    <h1 className='font-bold'>2024</h1>
+                    <p className='text-gray-500 text-sm'>Great Place to Work Certified</p>
+                  </div>
+                </div>
+
+                <div className='ml-1 flex items-center gap-2'>
+                  <div className='relative flex flex-col items-center justify-center'>
+                    <div className='border-5 border-gray-400 rounded-full w-2'>
+                      <div className='absolute mt-1.25 h-13 border border-gray-200'></div> 
+                    </div>
+                  </div>
+                  <div className='mt-4'>
+                    <h1 className='font-bold'>2023</h1>
+                    <p className='text-gray-500 text-sm'>APAC Stevie Award Bronze Winner</p>
+                  </div>
+                </div>
+
+                <div className=' ml-1 flex items-center gap-2'>
+                  <div className='relative flex flex-col items-center justify-center'>
+                    <div className='border-5 border-gray-400 rounded-full w-2'>
+                      <div className='absolute mt-1.25 h-13 border border-gray-200'></div> 
+                    </div>
+                  </div>
+                  <div className='mt-4'>
+                    <h1 className='font-bold'>2023</h1>
+                    <p className='text-gray-500 text-sm'>SDC Innovation Awards - DevOps</p>
+                  </div>
+                </div>
+
+                <div className=' ml-1 flex items-center gap-2'>
+                  <div className='relative flex flex-col items-center justify-center'>
+                    <div className='border-5 border-gray-400 rounded-full w-2'>
+                      <div className='absolute mt-1.25 h-13 border border-gray-200'></div> 
+                    </div>
+                  </div>
+                  <div className='mt-4'>
+                    <h1 className='font-bold'>2022</h1>
+                    <p className='text-gray-500 text-sm'>Pacesetter Awards</p>
+                  </div>
+                </div>
+
+                <div className=' ml-1 flex items-center gap-2'>
+                  <div className='relative flex flex-col items-center justify-center'>
+                    <div className='border-5 border-gray-400 rounded-full w-2'>
+                      <div className='absolute mt-1.25 h-13 border border-gray-200'></div> 
+                    </div>
+                  </div>
+                  <div className='mt-4'>
+                    <h1 className='font-bold'>2021</h1>
+                    <p className='text-gray-500 text-sm'>DevOps India Summit Awards</p>
+                  </div>
+                </div>
+
+                <div className=' ml-1 flex items-center gap-2'>
+                  <div className='relative flex flex-col items-center justify-center'>
+                    <div className='border-5 border-gray-400 rounded-full w-2'>
+                      <div className='absolute mt-1.25 h-16 border border-gray-200'></div> 
+                    </div>
+                  </div>
+                  <div className='mt-4'>
+                    <h1 className='font-bold'>2021</h1>
+                    <p className='text-gray-500 text-sm'>The People's Choice Stevie Awards</p>
+                  </div>
+                </div>
+
+                <div className='ml-1 -mt-3 flex items-center justify-center gap-2'>
+                  <div className='relative flex flex-col items-center justify-center'>
+                    <div className='border-5 border-gray-400 rounded-full w-2'>
+                    </div>
+                  </div>
+                  <div className='mt-4'>
+                    <h1 className='font-bold mt-6'>2020</h1>
+                    <p className='text-gray-500 text-sm'>American Business Award - Bronze Stevie Winner</p>
+                  </div>
+                </div>
+              </div>  
+            </div> 
+
+            <div className='p-4 mt-4 border border-gray-200 rounded-2xl bg-white'>
+              <div className='flex justify-between'>
+                <div>
+                  <h1 className='font-bold'>Reviews</h1>
+                  <p className='text-gray-600'>239 employee reviews</p>
+                </div>
+                <div className='text-blue-600 hover:underline font-semibold'>View All</div>
+              </div>
+
+              <div className='p-3 bg-gray-100 rounded-xl mt-3'>
+                  <div className='flex items-center gap-1'>
+                    <Star size={14} color='orange' fill='orange' />
+                    <p className='font-bold'>4.0</p>
+                  </div>
+                  <p className='text-xs'>rated by Lead Engineer in Pune</p>
+                  <p className='my-3 text-sm text-gray-700'>Flexibility due to Hybrid mode Work Life Balance</p>
+                  <p className='text-blue-600 hover:underline font-semibold'>Read full review</p>
+              </div>
+
+              <div className='mt-4 flex items-center gap-1'>
+                <p className='text-xs text-gray-500'>Powered by</p>
+                <em className='font-bold' title="Powered by Ambition Box">AmbitionBox</em>
+              </div>
+            </div>                                                                                                                                                                                         
         </div>
       </div>
       
