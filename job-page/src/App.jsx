@@ -1,6 +1,6 @@
 
 import './App.css'
-import { Briefcase, ChevronRight, CircleCheck, CircleX, IndianRupee, MapPin, Pin, Star } from 'lucide-react'
+import { Activity, Briefcase, ChevronRight, CircleCheck, CirclePile, CircleX, IndianRupee, Layers, MapPin, Pin, Star } from 'lucide-react'
 
 function App() {
   
@@ -11,7 +11,7 @@ function App() {
         Job Page
       </h1>
 
-      <div className='flex gap-3 sm:max-w-6xl mx-auto'>
+      <div className='flex gap-5 sm:max-w-6xl mx-auto'>
         {/** Left Side */}
         <div className='sm:w-[70%] mx-auto mt-5'>
           <div className='bg-white shadow-2xl p-2 rounded-2xl px-5'>
@@ -609,14 +609,79 @@ function App() {
                 <p className='text-xs text-gray-500'>Powered by</p>
                 <em className='font-bold' title="Powered by Ambition Box">AmbitionBox</em>
               </div>
+            </div>
+
+            <div className='p-4 mt-4 border border-gray-200 rounded-2xl bg-white'>
+              <div className='flex justify-between'>
+                <div>
+                  <h1 className='font-bold'>Salary insights</h1>                
+                </div>
+              </div>
+
+              <div className='p-3 bg-gray-100 rounded-xl mt-3'>
+                  <p className='text-medium text-gray-800'>Senior Software Engineer in Aziro typically earns between</p>
+                  <h1 className='flex items-center text-2xl font-bold my-4'><IndianRupee size={16}/>20.3 -  <IndianRupee size={16}/>22.5 L/yr</h1>
+                  <a className='text-blue-600 hover:underline font-semibold cursor-pointer'>See detailed salary breakup</a>
+              </div>
+
+              <div className='mt-4 flex items-center gap-1'>
+                <p className='text-xs text-gray-500'>Powered by</p>
+                <em className='font-bold' title="Powered by Ambition Box">AmbitionBox</em>
+              </div>
+            </div>  
+
+             <div className='p-4 mt-4 border border-gray-200 rounded-2xl bg-white'>
+              <div className='flex justify-between'>
+                <div>
+                  <h1 className='font-bold'>Benefits & Perks</h1>
+                  <p className='text-gray-600 text-wrap'>10 employee reported these benefits</p>
+                </div>
+                <div className='text-blue-600 hover:underline font-semibold'>View All</div>
+              </div>
+
+              <div className='p-3 rounded-xl mt-3 flex items-center justify-between'>
+                  <div className='gap-2 flex flex-col px-2'>
+                    <div className='bg-gray-100 rounded-full w-12 h-12 p-2 flex items-center justify-center'><Layers size={15}/></div>
+                    <p className='text-xs text-wrap'>Learning & Development Support</p>
+                  </div>
+                  <div className='gap-2 flex flex-col px-2'>
+                    <div className='bg-gray-100 rounded-full w-12 h-12 p-2 flex items-center justify-center'><Activity size={12}/></div>
+                    <p className='text-xs'>Health & Wellness Support</p>
+                  </div>
+                  <div className='gap-2 flex flex-col px-2'>
+                    <div className='bg-gray-100 rounded-full w-12 h-12 p-2 flex items-center justify-center'><CirclePile size={12}/></div>
+                    <p className='text-xs'>Performance Bonus & Benefits</p>
+                  </div>
+              </div>
+
+              <div className='mt-4 flex items-center gap-1'>
+                <p className='text-xs text-gray-500'>Powered by</p>
+                <em className='font-bold' title="Powered by Ambition Box">AmbitionBox</em>
+              </div>
+            </div>
+
+            <div className='p-4 mt-4 border border-gray-200 rounded-2xl bg-white'>
+              <div className='flex justify-center'>
+                  <h1 className='font-bold'>Services you might be interested in</h1>
+                  <div className='text-blue-600 hover:underline font-semibold text-sm w-30'>Know more</div>
+              </div>
+
+              <div className='my-4'>
+                <h3 className='text-gray-800 tracking-tight'>Resume Display</h3>
+                <p className='font-bold text-sm my-1'>Increase your profile visibility to recruiters upto 3 times</p>
+                <p className='text-gray-600 tracking-tight text-sm'>Get a Featured Profile, Stand out and get noticed in recruiter eyes.</p>
+              </div>
+
+              <div className='h-0 w-full border border-gray-100'></div>
+
+              <div className='mt-4 flex items-center gap-1'>
+                <p className='text-xs text-gray-500'>Powered by</p>
+                <em className='font-bold' title="Powered by Ambition Box">Naukri FASTFORWARD</em>
+              </div>
             </div>                                                                                                                                                                                         
         </div>
       </div>
-      
-      
-
-
-      
+         
     </div>
   )
 }
