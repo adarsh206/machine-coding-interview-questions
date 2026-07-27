@@ -1,0 +1,16 @@
+.infinite-scroll {
+  overflow-y: hidden;
+  width: 400px;
+  height: 400px;
+  border: 2px solid lightseagreen;
+  border-radius: 4px;
+  position: relative;
+}
+
+.random{
+  position: absolute;
+  top: 0;
+  height: 100px;
+  width: 100px;
+  back
+}

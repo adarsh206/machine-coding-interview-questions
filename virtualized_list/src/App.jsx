@@ -1,0 +1,18 @@
+
+import VirtualList from '../components/VirtualList'
+import './App.css'
+
+
+const LIST = Array.from({ length: 10000}, (_, index) => index);
+
+
+function App() {
+
+  return (
+   <div>
+      <VirtualList list={LIST} height={400} width={300} itemHeight={35}/>
+   </div>
+  )
+}
+
+export default App
