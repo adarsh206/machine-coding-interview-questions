@@ -3,7 +3,7 @@ import VirtualList from '../components/VirtualList'
 import './App.css'
 
 
-const LIST = Array.from({ length: 10000}, (_, index) => index);
+const LIST = Array.from({ length: 10000}, (_, index) => index + 1);
 
 
 function App() {

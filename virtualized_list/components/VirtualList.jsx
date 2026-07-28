@@ -4,10 +4,19 @@ import { useState } from "react"
 const VirtualList = ({ list, height, width, itemHeight }) => {
 
     const [indices, setIndices] = useState([0, Math.floor(height / itemHeight)]);
+    const visibleList = list.slice(indices[0], indices[1] + 1);
     
   return (
-        <div>
-            Virtualized List 
+        <div className="container" style={{ height, width, background: 'grey'}}>
+            {
+                visibleList.map((item) => {
+                    return (
+                        <div className="item" style={{ height: itemHeight, background: "coral", borderTop: '5px solid grey'}}>
+                            {"Item " + item}
+                        </div>
+                    )
+                })
+            }
         </div>
   )
 }
