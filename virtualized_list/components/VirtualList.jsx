@@ -7,16 +7,18 @@ const VirtualList = ({ list, height, width, itemHeight }) => {
     const visibleList = list.slice(indices[0], indices[1] + 1);
     
   return (
-        <div className="container" style={{ height, width, background: 'grey'}}>
-            {
-                visibleList.map((item) => {
-                    return (
-                        <div className="item" style={{ height: itemHeight, background: "coral", borderTop: '5px solid grey'}}>
-                            {"Item " + item}
-                        </div>
-                    )
-                })
-            }
+        <div className="container" style={{ height, width, background: 'grey', overflow: 'auto'}}>
+            <div style={{ height: list.length * itemHeight}}>
+                {
+                    visibleList.map((item) => {
+                        return (
+                            <div className="item" style={{ height: itemHeight, background: "coral", borderTop: '5px solid grey'}}>
+                                {"Item " + item}
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
   )
 }
