@@ -1,4 +1,23 @@
-.App{
-  font-family: sans-serif;
-  text-align: center;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.calendar{
+  position: relative;
+}
+
+.line{
+  position: absolute;
+  width: 1px;
+  left: 4rem;
+  height: 100%;
+  background-color: lightgray;
+}
+.slot{
+  width: 100%;
+  height: 5rem;
+  border-bottom: 1px solid lightgray;
+  padding-left: 1rem;
 }
