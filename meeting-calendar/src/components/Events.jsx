@@ -12,7 +12,9 @@ const Events = ({ events }) => {
 
                 const top = startHour * 5 + (startMinute / 60) * 5;
                 const height = (endHour - startHour) * 5 + ((endMinute - startMinute) / 60) * 5;
-                return;
+                return <div className="event" style={{ top: `${top}rem`, height: `${height}rem`}}>
+                        {event.title}
+                </div>
             })
         }
     </>
