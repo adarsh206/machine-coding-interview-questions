@@ -1,11 +1,11 @@
-// sort on the basis of start time, if same, end time basis
+
 
 import calculateEventLayout from "../utils/eventLayout";
 
 const Events = ({ events }) => {
   const updatedEvents = calculateEventLayout(events);
   console.log("updatedEvents", updatedEvents);
-  
+
   return (
     <>
         {
