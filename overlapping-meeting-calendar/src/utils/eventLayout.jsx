@@ -6,15 +6,27 @@ export const timeIntoMinutes = (time) => {
     return hour * 60 + minute;
 }
 
-const calculateEventLayout = (event) => {
-    console.log(event);
-    [...event].sort((a, b) => {
-        console.log("a-> ", a);
-        console.log("b-> ", b);
+const calculateEventLayout = (events) => {
+    console.log(events);
+
+    const sortedEvents = [...events].sort((a, b) => {
+        const start1 = timeIntoMinutes(a.start);
+        const start2 = timeIntoMinutes(b.start);
+        const diff = start1 - start2;
+
+        if(diff !== 0) return diff;
+
+       const end1 = timeIntoMinutes(a.end);
+       const end2 = timeIntoMinutes(b.end);
+
+       return end2 - end1;
     })
-  return (
-    <div>eventLayout</div>
-  )
+    console.log(sortedEvents);
+
+    const layout = [];
+
+    return layout;
+
 }
 
 export default calculateEventLayout
