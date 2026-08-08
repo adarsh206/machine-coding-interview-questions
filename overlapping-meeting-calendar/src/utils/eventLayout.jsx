@@ -30,9 +30,16 @@ const calculateEventLayout = (events) => {
     const layout = [];
 
     for(const event of sortedEvents){
-        const overlaps = layout.filter((layoutEvent) => isOverlap(layoutEvent, event))
-    }
+        const overlaps = layout.filter((layoutEvent) => isOverlap(layoutEvent, event));
+        const current = {...event};
+        current.column = overlaps.length;
+        const totalColumn = overlaps.length + 1;
+        current.totalColumn = totalColumn;
 
+        overlaps.forEach((layoutEvent) => layoutEvent.totalColumn = totalColumn);
+        layout.push(current);
+    }
+  
     return layout;
 
 }
