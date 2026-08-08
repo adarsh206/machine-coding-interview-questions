@@ -5,6 +5,9 @@ export const timeIntoMinutes = (time) => {
     const [hour, minute] = time.split(":").map(Number);
     return hour * 60 + minute;
 }
+const isOverlap = (event1, event2) => {
+    return timeIntoMinutes(event2.start) < timeIntoMinutes(event1.end);
+};
 
 const calculateEventLayout = (events) => {
     console.log(events);
@@ -21,9 +24,14 @@ const calculateEventLayout = (events) => {
 
        return end2 - end1;
     })
+     
     console.log(sortedEvents);
 
     const layout = [];
+
+    for(const event of sortedEvents){
+        const overlaps = layout.filter((layoutEvent) => isOverlap(layoutEvent, event))
+    }
 
     return layout;
 
