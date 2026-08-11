@@ -11,6 +11,11 @@ const FileUploader = () => {
         setFiles([...files, ...selectedFiles]);
     }
 
+    const removeFile = (fileName) => {
+        const filteredFiles = files.filter((file) => file.name !== fileName);
+        setFiles(filteredFiles)
+    }
+
     console.log(files);
 
     return (
@@ -26,7 +31,7 @@ const FileUploader = () => {
             {/** Preview Zone */}
             <div className="preview-container">
                 {files.map((file) => {
-                    return <Preview key={file.name} fileDetail={file} />
+                    return <Preview key={file.name} fileDetail={file} onRemove={removeFile} />
                 } )}
             </div>
         </div>
