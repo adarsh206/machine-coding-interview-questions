@@ -5,6 +5,7 @@ import Preview from "./Preview";
 const FileUploader = () => {
 
     const [files, setFiles] = useState([]);
+    const [isDragging, setIsDragging] = useState(false);
 
     const handleChange = (e) => {
         const selectedFiles = e.target.files;
@@ -16,13 +17,16 @@ const FileUploader = () => {
         setFiles(filteredFiles)
     }
 
-    console.log(files);
+    const handleDragEnter = (e) => {
+        e.preventDefault();
+        setIsDragging(true);
+    }
 
     return (
         <div className="file-uploader">
             {/** Drag And Drop Zone */}
 
-            <div className="dropzone">
+            <div onDragEnter={handleDragEnter} className={`dropzone ${isDragging ? 'dragging' : ''}`}>
                 <p>Drag and Drop File here or</p>
                 <input onChange={handleChange} type="file" multiple className="hidden-input" id="file-input"/>
                 <label className="browse-btn" htmlFor="file-input">Browser Files</label>
