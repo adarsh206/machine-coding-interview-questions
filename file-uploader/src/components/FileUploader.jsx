@@ -22,11 +22,23 @@ const FileUploader = () => {
         setIsDragging(true);
     }
 
+    const handleDragLeave = (e) => {
+        e.preventDefault();
+        setIsDragging(false);
+    }
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        const droppedFile = e.dataTransfer.files;
+        setFiles([...files, ...droppedFile])
+        console.log(droppedFile);
+    }
+
     return (
         <div className="file-uploader">
             {/** Drag And Drop Zone */}
 
-            <div onDragEnter={handleDragEnter} className={`dropzone ${isDragging ? 'dragging' : ''}`}>
+            <div onDragEnter={handleDragEnter} onDragOver={handleDragEnter} onDragLeave={handleDragLeave} onDrop={handleDrop} className={`dropzone ${isDragging ? 'dragging' : ''}`}>
                 <p>Drag and Drop File here or</p>
                 <input onChange={handleChange} type="file" multiple className="hidden-input" id="file-input"/>
                 <label className="browse-btn" htmlFor="file-input">Browser Files</label>
