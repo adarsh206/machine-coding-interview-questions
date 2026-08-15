@@ -1,9 +1,11 @@
 
 
-const Cell = ({ row, col }) => {
+const Cell = ({ molePos, row, col }) => {
   return (
     <div className="cell">
-        Cell
+        {
+            row === molePos[0] && col === molePos[1] && '☠️'
+        }
     </div>
   )
 }
