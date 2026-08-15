@@ -1,0 +1,13 @@
+.App{
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.row{
+    display: flex;
+}
+.cell{
+    height: 4rem;
+    width: 4rem;
+    border: 1px solid black;
+}
