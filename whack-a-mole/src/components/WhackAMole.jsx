@@ -4,13 +4,19 @@ import { useState } from "react"
 import {generateMolePosition} from '../utils/moleUtils' 
 
 
-const WhackAMole = ({ size }) => {
+const WhackAMole = ({ size, delay }) => {
 
     const [molePos, setMolePos] = useState(generateMolePosition(size));
     console.log(molePos)
 
     useEffect(() => {
+        const interval = setInterval(() => {
+            setMolePos(generateMolePosition(size));
+        }, delay);
 
+        return () => { 
+            clearInterval(interval) 
+        }
     },[])
   return (
     <div>
