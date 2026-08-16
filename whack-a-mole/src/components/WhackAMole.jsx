@@ -7,7 +7,7 @@ import {generateMolePosition} from '../utils/moleUtils'
 const WhackAMole = ({ size, delay }) => {
 
     const [molePos, setMolePos] = useState(generateMolePosition(size));
-    console.log(molePos)
+    const [score, setScore] = useState(0);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -18,17 +18,22 @@ const WhackAMole = ({ size, delay }) => {
             clearInterval(interval) 
         }
     },[])
+
   return (
-    <div>
-        {Array.from({ length: size }).map((value, row) => {
-            return (
-                <div className="row" key={row}>
-                    {Array.from({ length: size }).map((_, col) => {
-                        return <Cell key={`${row}, ${col}`} molePos={molePos} row={row} col={col} />
-                    })}
-                </div>
-        )})}
-    </div>
+    <>
+        <h1>Score : {score}</h1>
+        <div>
+            {Array.from({ length: size }).map((value, row) => {
+                return (
+                    <div className="row" key={row}>
+                        {Array.from({ length: size }).map((_, col) => {
+                            return <Cell key={`${row}, ${col}`} molePos={molePos} row={row} col={col} setScore={setScore} setMolePos={setMolePos} size={size}/>
+                        })}
+                    </div>
+            )})}
+        </div>
+    </>
+   
   )
 }
 
