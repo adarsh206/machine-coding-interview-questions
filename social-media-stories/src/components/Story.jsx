@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const closeTime = 3000;
-const STORY_LIFETIME = 60_000;
+const STORY_LIFETIME = 15_000;
 
 const Story = () => {
 
@@ -11,7 +11,14 @@ const Story = () => {
         const file = e.target.files[0];
         console.log(file)
         const imageUrl = URL.createObjectURL(file);
-        setPreviewStoriesUrl((prev) => [imageUrl, ...prev]);
+        const id = crypto.randomUUID();
+        const storyObj = {id: id, imageUrl: imageUrl}
+        
+        setTimeout(() => {
+            setPreviewStoriesUrl((prev) => prev.filter((story) => story.id !== id));
+        }, STORY_LIFETIME);
+
+        setPreviewStoriesUrl((prev) => [storyObj, ...prev]);
     }
 
   return (
@@ -23,8 +30,8 @@ const Story = () => {
             {
                 previewStoriesUrl.map((story) => {
                     return (
-                        <div aria-label="preview-story" className="story-preview">
-                            <img src={story} alt="Story preview"/>
+                        <div key={story.id} aria-label="preview-story" className="story-preview">
+                            <img src={story.imageUrl} alt="Story preview"/>
                         </div>
                     )
                 })
