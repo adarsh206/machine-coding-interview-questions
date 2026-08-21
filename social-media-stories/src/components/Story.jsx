@@ -9,13 +9,20 @@ const Story = () => {
     const handleChange = (e) => {
   
         const file = e.target.files[0];
-        console.log(file)
         const imageUrl = URL.createObjectURL(file);
         const id = crypto.randomUUID();
         const storyObj = {id: id, imageUrl: imageUrl}
         
         setTimeout(() => {
-            setPreviewStoriesUrl((prev) => prev.filter((story) => story.id !== id));
+            setPreviewStoriesUrl((prev) => prev.filter((story) => {
+                if(story.id === id) {
+                    URL.revokeObjectURL(story.imageUrl);
+                }
+                else{
+                    return true;
+                }
+            }
+        ));
         }, STORY_LIFETIME);
 
         setPreviewStoriesUrl((prev) => [storyObj, ...prev]);
@@ -45,3 +52,12 @@ const Story = () => {
 }
 
 export default Story
+
+
+export const Modal = ({ imageSrc }) => {
+    return (
+        <div className="overlay-modal">
+            <img src={imageSrc} alt="Story" />
+        </div>
+    )
+}
